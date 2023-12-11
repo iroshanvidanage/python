@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+</head>
+<body>
+<h1>Student Details</h1>
+<form method="post">
+    <ul>
+        <li>Name with Initials: <input type="text" name="nameini"/><br/></li>
+        <li>Names Indicated by Initials: <input type="text" name="initnames"><br/></li>
+        <li>E-mail: <input type="email" name="email"><br/></li>
+        <li>Birthday: <input type="date" name="birthday"><br/></li>
+        <li>Index: <input type="number" name="index"><br/></li>
+        <li>LinkedIn: <input type="url" name="linkedin"><br/></li>
+    </ul>
+
+    <p><input type="submit" name="dopost" value="Submit"/>
+    </p>
+</form>
+<hr>
+{{ data|safe }}
+</body>
+</html>

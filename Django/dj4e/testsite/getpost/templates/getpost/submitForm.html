@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Form</title>
+</head>
+<body>
+<form method="post">
+    <p><label for="inp01">Account:</label>
+    <input type="text" name="account" id="inp01" size="40">
+    </p>
+    <p><label for="inp02">Password:</label>
+    <input type="text" name="password" id="inp02" size="40">
+    </p>
+    <p><label for="inp03">Name:</label>
+    <input type="text" name="name" id="inp03" size="40">
+    </p>
+    <p>Preferred Time:<br/>
+        <input type="radio" name="when" value="am">AM<br/>
+        <input type="radio" name="when" value="pm">PM<br/>
+    </p>
+    <p>Enrollment:<br/>
+        <input type="checkbox" name="class1" value="CS4125">Machine Vision<br/>
+        <input type="checkbox" name="class2" value="CS1235">Operating Systems<br/>
+        <input type="checkbox" name="class3" value="CS2625">Data Science<br/>
+        <input type="checkbox" name="class4" value="CS1325">Web Development<br/>
+        <input type="checkbox" name="class5" value="CS1323">Hardware Architecture<br/>
+    </p>
+    <p><label for="inp06">Intake:</label>
+        <select name="intake" id="inp06">
+            <option value="0">--Please Select--</option>
+            <option value="1">2016</option>
+            <option value="2">2017</option>
+            <option value="3">2018</option>
+            <option value="4">2019</option>
+            <option value="5">2020</option>
+        </select>
+    </p>
+    <p><label for="inp07">Questions:</label><br/>
+        <textarea rows="10" cols="60" id="inp07" name="questions"></textarea>
+    </p>
+    <p>
+        <input type="submit" name="dopost" value="Submit"/>
+    </p>
+</form>
+<hr>
+{{ data|safe }}
+</body>
+</html>
