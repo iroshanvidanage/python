@@ -1,5 +1,6 @@
 # exclude idea
 */.idea
+.idea
 
 # exclude vscode
 .vscode
