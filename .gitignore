@@ -4,3 +4,6 @@
 
 # exclude vscode
 .vscode
+
+# virtual env
+venv
