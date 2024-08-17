@@ -1,0 +1,22 @@
+---
+# author    https://github.com/iroshanvidanage
+# date      08/18/2023
+
+stages:
+  - lint_test
+  - build
+  - deploy
+
+image: python:3.8.0-slim
+
+lint_test:
+  stage: lint_test
+  before-script:
+    - pip3 install flake8-html -y
+  script:
+    - flake8 --format=html --htmldir=flake_reports/
+  artifacts:
+    when: always # to store reports even if the job fails
+    paths:
+      - flake_reports/
+    expire_in: "2 days"
