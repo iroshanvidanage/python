@@ -2,19 +2,24 @@
 # author    https://github.com/iroshanvidanage
 # date      08/18/2024
 
+
 stages:
   - test
   - build
   - deploy_staging
   - release_test
+  - deploy_production
+
 
 variables:
   PYTHON_IMAGE: python:3.8.0-slim
   DOCKER_IMAGE: docker:latest
   IMAGE_TAG: $CI_REGISTRY_IMAGE/employee-image:$CI_COMMIT_REF_SLUG
-  STAGING_URL: [app_in_heroku]
-  HEROKU_STAGING: registry.heroku.com/$STAGING_URL/web
-  
+  STAGING_APP: [app_in_heroku]
+  PRODUCTION_APP: [app_in_heroku]
+  HEROKU_STAGING: "registry.heroku.com/$STAGING_APP/web"
+  HEROKU_PRODUCTION: "registry.heroku.com/$PRODUCTION_APP/web"
+
 
 # image: python:3.8.0-slim
 
@@ -31,6 +36,7 @@ lint_test:
       - flake_reports/
     expire_in: "2 days"
 
+
 pytest:
   image: $PYTHON_IMAGE
   stage: test
@@ -44,6 +50,7 @@ pytest:
     paths:
       - pytest_reports/
 
+
 build:
   image: $DOCKER_IMAGE
   services:
@@ -55,6 +62,7 @@ build:
     - docker build -t $IMAGE_TAG .
     - docker images
     - docker push $IMAGE_TAG
+
 
 deploy_staging:
   image: $DOCKER_IMAGE
@@ -69,8 +77,9 @@ deploy_staging:
     - docker login -u _ -p $HEROKU_STAGING_API_KEY registry.heroku.com
     - docker push $HEROKU_STAGING
     # Can add the following codes or add another job for the releasing app to heroku
-    - docker run --rm -e HEROKU_API_KEY=$HEROKU_STAGING_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $STAGING_URL
-    - echo "App deployed to staging server at https://$STAGING_URL.herokuapp.com/"
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_STAGING_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $STAGING_APP
+    - echo "App deployed to staging server at https://$STAGING_APP.herokuapp.com/"
+
 
 # the following job can be added additionally for heroku release
 release_staging:
@@ -79,12 +88,13 @@ release_staging:
   before-script:
     - npm install -g heroku
   script:
-    - HEROKU_API_KEY=$HEROKU_STAGING_API_KEY heroku container:release web --app $STAGING_URL
-    - echo "App deployed to staging server at https://$STAGING_URL.herokuapp.com/"
+    - HEROKU_API_KEY=$HEROKU_STAGING_API_KEY heroku container:release web --app $STAGING_APP
+    - echo "App deployed to staging server at https://$STAGING_APP.herokuapp.com/"
   need:
     - job: deploy_staging
       artifacts: false
   when: manual
+
 
 release_test:
   image: alpine:latest
@@ -92,5 +102,20 @@ release_test:
   before-script:
     - apk --no-cache add curl
   script:
-    - curl https://$STAGING_URL.herokuapp.com/ | grep "Employee Data"
- 
+    - curl https://$STAGING_APP.herokuapp.com/ | grep "Employee Data"
+
+
+deploy_production:
+  image: $DOCKER_IMAGE
+  services:
+    - docker:dind
+  stage: deploy_production
+  before-script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - ducker pull $IMAGE_TAG
+    - docker tag $IMAGE_TAG $HEROKU_PRODUCTION
+    - docker login -u _ -p $HEROKU_PRODUCTION_API_KEY registry.heroku.com
+    - docker push $HEROKU_PRODUCTION
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_PRODUCTION_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $PRODUCTION_APP
+    - echo "App deployed to production server at https://$PRODUCTION_APP.herokuapp.com/"
