@@ -17,6 +17,16 @@
     - `read_registry` for read (pull) access
     - `write_redistry` for write (push) access
 
+
+### Heroku
+
+- Pushing the image to Heroku containers
+
+- There's a registry in Heroku
+    - `registry.heroku.com/[app_in_heroku]/[process_type]`
+
+- Need a heroku token from API key and store it as a secret variable in gitlab `HEROKU_STAGING_API_KEY`
+
 ### Procfile
 
 - Procfile is used declare the process types to specifies the commands that are executed by the app on start up included in the Heroku Apps.
