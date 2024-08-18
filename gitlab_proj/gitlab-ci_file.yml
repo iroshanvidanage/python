@@ -64,5 +64,5 @@ deploy_staging:
   script:
     - ducker pull $IMAGE_TAG
     - docker tag $IMAGE_TAG $HEROKU_STAGING
-    - docker login -u _ -p $HEROKU_STAGING_API_KEY
+    - docker login -u _ -p $HEROKU_STAGING_API_KEY registry.heroku.com
     - docker push $HEROKU_STAGING
