@@ -3,14 +3,14 @@
 # date      08/18/2023
 
 stages:
-  - lint_test
+  - test
   - build
   - deploy
 
 image: python:3.8.0-slim
 
 lint_test:
-  stage: lint_test
+  stage: test
   before-script:
     - pip3 install flake8-html -y
   script:
@@ -20,3 +20,15 @@ lint_test:
     paths:
       - flake_reports/
     expire_in: "2 days"
+
+pytest:
+  stage: test
+  before-script:
+    - pip3 install pytest-html
+    - pip3 install -r requirements.txt
+  script:
+    - pytest --html=pytest_reports/pytest_report.html --self-contained-html
+  artifacts:
+    when: always
+    paths:
+      - pytest_reports/
