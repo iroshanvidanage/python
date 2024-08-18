@@ -6,6 +6,7 @@ stages:
   - test
   - build
   - deploy_staging
+  - release_test
 
 variables:
   PYTHON_IMAGE: python:3.8.0-slim
@@ -84,3 +85,12 @@ release_staging:
     - job: deploy_staging
       artifacts: false
   when: manual
+
+release_test:
+  image: alpine:latest
+  stage: release_test
+  before-script:
+    - apk --no-cache add curl
+  script:
+    - curl https://$STAGING_URL.herokuapp.com/ | grep "Employee Data"
+ 
