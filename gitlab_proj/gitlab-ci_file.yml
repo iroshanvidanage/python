@@ -6,9 +6,9 @@
 stages:
   - test
   - build
-  - deploy_staging
-  - release_test
-  - deploy_production
+  - feature
+  - staging
+  - production
 
 
 variables:
@@ -20,10 +20,11 @@ variables:
   IMAGE_TAG: $CI_REGISTRY_IMAGE/employee-image:$CI_COMMIT_SHORT_SHA
   STAGING_APP: [app_in_heroku]
   PRODUCTION_APP: [app_in_heroku]
-  FEATURE_APP: ${CI_ENVIRONMENT_SLUG}
+  # variable in variable has an issue while running in gitlab pipelines, please check for in job variable declaring
+  # FEATURE_APP: ${CI_ENVIRONMENT_SLUG}
   HEROKU_STAGING: "registry.heroku.com/$STAGING_APP/web"
   HEROKU_PRODUCTION: "registry.heroku.com/$PRODUCTION_APP/web"
-  HEROKU_FEATURE: "registry.heroku.com/$FEATURE_APP/web"
+  # HEROKU_FEATURE: "registry.heroku.com/$FEATURE_APP/web"
 
 
 # image: python:3.8.0-slim
@@ -71,29 +72,54 @@ build:
 
 deploy_feature:
   image: $DOCKER_IMAGE
+  only:
+    - /^feature-.*$/
   services:
     - docker:dind
-  stage: deploy_feature
+  stage: feature
   environment:
-    name: feature
-    url: https://$FEATURE_APP.herokuapp.com/
+    name: review/$CI_COMMIT_REF_NAME
+    url: https://$CI_ENVIRONMENT_SLUG.herokuapp.com/
   before-script:
+    - export FEATURE_APP=$CI_ENVIRONMENT_SLUG
+    - export HEROKU_FEATURE="registry.heroku.com/$FEATURE_APP/web"
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
+    - echo "FEATURE_APP=$CI_ENVIRONMENT_SLUG" > feature.env
     - ducker pull $IMAGE_TAG
     - docker tag $IMAGE_TAG $HEROKU_FEATURE
+    # levaragin the same script to create a new app in Heroku
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_FEATURE_API_KEY wingrunr21/alpine-heroku-cli create $FEATURE_APP
     - docker login -u _ -p $HEROKU_FEATURE_API_KEY registry.heroku.com
     - docker push $HEROKU_FEATURE
     # Can add the following codes or add another job for the releasing app to heroku
     - docker run --rm -e HEROKU_API_KEY=$HEROKU_FEATURE_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $FEATURE_APP
-    - echo "App deployed to staging server at https://$FEATURE_APP.herokuapp.com/"
+    - echo "App deployed to feature server at https://$FEATURE_APP.herokuapp.com/"
+  artifacts:
+    reports:
+      dotenv: feature.env
+
+
+feature_test:
+  image: alpine:latest
+  only:
+    - /^feature-.*$/
+  stage: feature
+  before-script:
+    - apk --no-cache add curl
+  script:
+    - curl https://$FEATURE_APP.herokuapp.com/ | grep "Employee Data"
+  dependencies:
+    - deploy_feature
 
 
 deploy_staging:
   image: $DOCKER_IMAGE
+  except:
+    - /^feature-.*$/
   services:
     - docker:dind
-  stage: deploy_staging
+  stage: staging
   environment:
     name: staging
     url: https://$STAGING_APP.herokuapp.com/
@@ -112,7 +138,7 @@ deploy_staging:
 # the following job can be added additionally for heroku release
 release_staging:
   image: node:latest
-  stage: deploy_staging
+  stage: staging
   before-script:
     - npm install -g heroku
   script:
@@ -124,13 +150,18 @@ release_staging:
   when: manual
 
 
-release_test:
+staging_test:
   image: alpine:latest
-  stage: release_test
+  except:
+    - /^feature-.*$/
+  stage: staging
   before-script:
     - apk --no-cache add curl
   script:
     - curl https://$STAGING_APP.herokuapp.com/ | grep "Employee Data"
+  need:
+    - job: deploy_staging
+      artifacts: false
 
 
 deploy_production:
@@ -141,7 +172,7 @@ deploy_production:
   image: $DOCKER_IMAGE
   services:
     - docker:dind
-  stage: deploy_production
+  stage: production
   environment:
     name: production
     url: https://$PRODUCTION_APP.herokuapp.com/
