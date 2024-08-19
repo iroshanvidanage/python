@@ -14,7 +14,10 @@ stages:
 variables:
   PYTHON_IMAGE: python:3.8.0-slim
   DOCKER_IMAGE: docker:latest
-  IMAGE_TAG: $CI_REGISTRY_IMAGE/employee-image:$CI_COMMIT_REF_SLUG
+  # this image tag will only create a tagged image from the branch which will hinder the rollbacks
+  # IMAGE_TAG: $CI_REGISTRY_IMAGE/employee-image:$CI_COMMIT_REF_SLUG
+  # hence using the short_sha variable for having unique image ids for each environment
+  IMAGE_TAG: $CI_REGISTRY_IMAGE/employee-image:$CI_COMMIT_SHORT_SHA
   STAGING_APP: [app_in_heroku]
   PRODUCTION_APP: [app_in_heroku]
   HEROKU_STAGING: "registry.heroku.com/$STAGING_APP/web"
