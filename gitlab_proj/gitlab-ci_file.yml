@@ -113,6 +113,22 @@ feature_test:
     - deploy_feature
 
 
+stop_feature:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: feature
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+  before-script:
+    - export FEATURE_APP=$CI_ENVIRONMENT_SLUG
+  script:
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_FEATURE_API_KEY wingrunr21/alpine-heroku-cli apps:destroy --app $FEATURE_APP --confirm $FEATURE_APP
+    - echo "App destroyed from feature server at https://$FEATURE_APP.herokuapp.com/"
+  
+
+
+
 deploy_staging:
   image: $DOCKER_IMAGE
   except:
