@@ -69,6 +69,9 @@ deploy_staging:
   services:
     - docker:dind
   stage: deploy_staging
+  environment:
+    name: staging
+    url: https://$STAGING_APP.herokuapp.com/
   before-script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
@@ -114,6 +117,9 @@ deploy_production:
   services:
     - docker:dind
   stage: deploy_production
+  environment:
+    name: production
+    url: https://$PRODUCTION_APP.herokuapp.com/
   before-script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
