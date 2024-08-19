@@ -78,3 +78,17 @@ job_2:
     - echo "Job_2 starts"
     - echo "Job_2 ends !"
 ```
+
+- Generalized Job variables should be defined for each job or environment. (locally in the job or in the pipeline's CI/CD variables)
+
+```yml
+
+# these can be declared for each environment in the CI/CD variables in the project settings
+# feature, staging, production
+
+job:
+  variables:
+    APP:
+    HEROKU:
+    HEROKU_API_KEY:
+```

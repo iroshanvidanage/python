@@ -1,0 +1,217 @@
+---
+# author    https://github.com/iroshanvidanage
+# date      08/19/2024
+
+
+stages:
+  - test
+  - build
+  - feature
+  - staging
+  - production
+
+
+variables:
+  PYTHON_IMAGE: python:3.8.0-slim
+  DOCKER_IMAGE: docker:latest
+  # this image tag will only create a tagged image from the branch which will hinder the rollbacks
+  # IMAGE_TAG: $CI_REGISTRY_IMAGE/employee-image:$CI_COMMIT_REF_SLUG
+  # hence using the short_sha variable for having unique image ids for each environment
+  IMAGE_TAG: $CI_REGISTRY_IMAGE/employee-image:$CI_COMMIT_SHORT_SHA
+  STAGING_APP: [app_in_heroku]
+  PRODUCTION_APP: [app_in_heroku]
+  # variable in variable has an issue while running in gitlab pipelines, please check for in job variable declaring
+  # FEATURE_APP: ${CI_ENVIRONMENT_SLUG}
+  HEROKU_STAGING: "registry.heroku.com/$STAGING_APP/web"
+  HEROKU_PRODUCTION: "registry.heroku.com/$PRODUCTION_APP/web"
+  # HEROKU_FEATURE: "registry.heroku.com/$FEATURE_APP/web"
+
+
+# image: python:3.8.0-slim
+
+.deploy: &deploy_template
+  image: $DOCKER_IMAGE
+  services:
+    - docker:dind
+  environment:
+    url: https://$APP.herokuapp.com/
+  before-script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - ducker pull $IMAGE_TAG
+  script:
+    - ducker pull $IMAGE_TAG
+    - docker tag $IMAGE_TAG $HEROKU
+    - docker login -u _ -p $HEROKU_API_KEY registry.heroku.com
+    - docker push $HEROKU
+    # Can add the following codes or add another job for the releasing app to heroku
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $APP
+    - echo "App deployed to server at https://$APP.herokuapp.com/"
+
+
+.test: &test
+  image: alpine:latest
+  before-script:
+    - apk --no-cache add curl
+  script:
+    - curl https://$APP.herokuapp.com/ | grep "Employee Data"
+
+
+lint_test:
+  image: $PYTHON_IMAGE
+  stage: test
+  before-script:
+    - pip3 install flake8-html -y
+  script:
+    - flake8 --format=html --htmldir=flake_reports/
+  artifacts:
+    when: always # to store reports even if the job fails
+    paths:
+      - flake_reports/
+    expire_in: "2 days"
+
+
+pytest:
+  image: $PYTHON_IMAGE
+  stage: test
+  before-script:
+    - pip3 install pytest-html
+    - pip3 install -r requirements.txt
+  script:
+    - pytest --html=pytest_reports/pytest_report.html --self-contained-html
+  artifacts:
+    when: always
+    paths:
+      - pytest_reports/
+
+
+build:
+  image: $DOCKER_IMAGE
+  services:
+    - docker:dind
+  stage: build
+  before-script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $IMAGE_TAG .
+    - docker images
+    - docker push $IMAGE_TAG
+
+
+deploy_feature:
+  image: $DOCKER_IMAGE
+  only:
+    - /^feature-.*$/
+  services:
+    - docker:dind
+  stage: feature
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: https://$CI_ENVIRONMENT_SLUG.herokuapp.com/
+    on_stop: stop_feature
+  before-script:
+    - export FEATURE_APP=$CI_ENVIRONMENT_SLUG
+    - export HEROKU_FEATURE="registry.heroku.com/$FEATURE_APP/web"
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - echo "FEATURE_APP=$CI_ENVIRONMENT_SLUG" > feature.env
+    - ducker pull $IMAGE_TAG
+    - docker tag $IMAGE_TAG $HEROKU_FEATURE
+    # levaragin the same script to create a new app in Heroku
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_FEATURE_API_KEY wingrunr21/alpine-heroku-cli create $FEATURE_APP
+    - docker login -u _ -p $HEROKU_FEATURE_API_KEY registry.heroku.com
+    - docker push $HEROKU_FEATURE
+    # Can add the following codes or add another job for the releasing app to heroku
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_FEATURE_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $FEATURE_APP
+    - echo "App deployed to feature server at https://$FEATURE_APP.herokuapp.com/"
+  artifacts:
+    reports:
+      dotenv: feature.env
+
+
+feature_test:
+  <<: *test
+  only:
+    - /^feature-.*$/
+  stage: feature
+  variables:
+    APP: $FEATURE_APP
+  dependencies:
+    - deploy_feature
+
+
+stop_feature:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: feature
+  variables:
+    GIT_STRATEGY: none
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
+  before-script:
+    - export FEATURE_APP=$CI_ENVIRONMENT_SLUG
+  script:
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_FEATURE_API_KEY wingrunr21/alpine-heroku-cli apps:destroy --app $FEATURE_APP --confirm $FEATURE_APP
+    - echo "App destroyed from feature server at https://$FEATURE_APP.herokuapp.com/"
+  when: manual
+  
+
+deploy_staging:
+  <<: *deploy
+  except:
+    - /^feature-.*$/
+  stage: staging
+  variables:
+    APP: $STAGING_APP
+    HEROKU: $HEROKU_STAGING
+    HEROKU_API_KEY: $HEROKU_STAGING_API_KEY
+  environment:
+    name: staging
+
+
+# the following job can be added additionally for heroku release
+release_staging:
+  image: node:latest
+  stage: staging
+  before-script:
+    - npm install -g heroku
+  script:
+    - HEROKU_API_KEY=$HEROKU_STAGING_API_KEY heroku container:release web --app $STAGING_APP
+    - echo "App deployed to staging server at https://$STAGING_APP.herokuapp.com/"
+  need:
+    - job: deploy_staging
+      artifacts: false
+  when: manual
+
+
+staging_test:
+  <<: *test
+  except:
+    - /^feature-.*$/
+  stage: staging
+  variables:
+    APP: $STAGING_APP
+  need:
+    - job: deploy_staging
+      artifacts: false
+
+
+deploy_production:
+  <<: *deploy
+  only:
+    - main
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^APP_NAME/ # regular expression for the app release tag
+  stage: production
+  variables:
+    APP: $PRODUCTION_APP
+    HEROKU: $HEROKU_PRODUCTION
+    HEROKU_API_KEY: $HEROKU_PRODUCTION_API_KEY
+  environment:
+    name: production
+  when: manual
+
+
+
