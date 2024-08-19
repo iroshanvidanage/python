@@ -17,6 +17,9 @@
     - `read_registry` for read (pull) access
     - `write_redistry` for write (push) access
 
+- Lint tools in GitLab
+    - In the GUI: *CI/CD* -> *Pipelines* -> *CI lint*
+
 
 ### Heroku
 
@@ -26,6 +29,7 @@
     - `registry.heroku.com/[app_in_heroku]/[process_type]`
 
 - Need a heroku token from API key and store it as a secret variable in gitlab `HEROKU_STAGING_API_KEY`
+
 
 ### Procfile
 
@@ -44,6 +48,7 @@
 variables:
     GIT_STRATEGY: none
 ```
+
 
 ### Job Templating
 
@@ -91,4 +96,28 @@ job:
     APP:
     HEROKU:
     HEROKU_API_KEY:
+```
+
+
+### Job Scheduling
+
+- Configure the pipelines to run repititively on pre specified time.
+- In the GUI: *CI/CD* -> *Schedules*
+
+
+### Job Timeouts
+
+- Has three levels of time-outs: default is 1 hour
+    - Job-level
+    - Runner-specific
+    - Project-level
+
+- In the GUI: *Settings* -> *General Pipelines* -> *Timeout* << for Project level
+    - between: 10 minutes & 1 month
+
+- In the job level:
+```yml
+job:
+  script: echo "Hello"
+  timeout: 20m
 ```
