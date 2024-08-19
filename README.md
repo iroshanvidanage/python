@@ -62,6 +62,10 @@
 
 - Scripts written to test dunder methods.
 
+### gitlab_proj
+
+- A project created with along side of GitLab CI pipeline automation.
+
 ### hackerrank
 
 - Hackerrank solutions.
