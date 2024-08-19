@@ -20,8 +20,10 @@ variables:
   IMAGE_TAG: $CI_REGISTRY_IMAGE/employee-image:$CI_COMMIT_SHORT_SHA
   STAGING_APP: [app_in_heroku]
   PRODUCTION_APP: [app_in_heroku]
+  FEATURE_APP: ${CI_ENVIRONMENT_SLUG}
   HEROKU_STAGING: "registry.heroku.com/$STAGING_APP/web"
   HEROKU_PRODUCTION: "registry.heroku.com/$PRODUCTION_APP/web"
+  HEROKU_FEATURE: "registry.heroku.com/$FEATURE_APP/web"
 
 
 # image: python:3.8.0-slim
@@ -65,6 +67,26 @@ build:
     - docker build -t $IMAGE_TAG .
     - docker images
     - docker push $IMAGE_TAG
+
+
+deploy_feature:
+  image: $DOCKER_IMAGE
+  services:
+    - docker:dind
+  stage: deploy_feature
+  environment:
+    name: feature
+    url: https://$FEATURE_APP.herokuapp.com/
+  before-script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - ducker pull $IMAGE_TAG
+    - docker tag $IMAGE_TAG $HEROKU_FEATURE
+    - docker login -u _ -p $HEROKU_FEATURE_API_KEY registry.heroku.com
+    - docker push $HEROKU_FEATURE
+    # Can add the following codes or add another job for the releasing app to heroku
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_FEATURE_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $FEATURE_APP
+    - echo "App deployed to staging server at https://$FEATURE_APP.herokuapp.com/"
 
 
 deploy_staging:
