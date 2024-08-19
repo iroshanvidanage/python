@@ -30,3 +30,9 @@
 ### Procfile
 
 - Procfile is used declare the process types to specifies the commands that are executed by the app on start up included in the Heroku Apps.
+
+
+### Dynamic environments
+
+- In order to stop a dynamic environment, need to remove the protection from the `feature-` branches and secrets/variables.
+- To the stop environment to be worked, need to create a merge request with Delete source branch option applied.
