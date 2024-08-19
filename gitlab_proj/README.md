@@ -36,3 +36,45 @@
 
 - In order to stop a dynamic environment, need to remove the protection from the `feature-` branches and secrets/variables.
 - To the stop environment to be worked, need to create a merge request with Delete source branch option applied.
+
+- The following is used to stop the git checkout the code.
+- The GitLab runner will always try to checkout the code once a job is complete, since the code branch will be deleted in the sceneario, we need to stop it from checking out the code.
+
+```yml
+variables:
+    GIT_STRATEGY: none
+```
+
+### Job Templating
+
+- Move similar jobs to a template and import them when necessary.
+
+- YAML Anchors
+
+```yml
+---
+# this file only contains example jobs used for yaml anchors
+
+.job_template: &template # & shows that this is an anchor and the name of the anchor is `template`
+  image: python:3.8.0-slim
+  before-script:
+    - pip3 install -r requirements.txt
+  only:
+    - main
+
+
+job_1:
+  <<: *template # <<: indicates that the lines from the anchor should be merged to this mapping.
+  stage: test
+  script:
+    - echo "Job_1 starts"
+    - echo "Job_1 ends !"
+
+
+job_2:
+  <<: *template # the anchor is referenced from the * (star)
+  stage: test
+  script:
+    - echo "Job_2 starts"
+    - echo "Job_2 ends !"
+```
