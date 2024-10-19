@@ -11,7 +11,7 @@ class tlsCheck(AgentCheck):
     def check(self, instance):
         # date format
         date_format = "%Y-%m-%d"
-        # Replace "$certificate" with the actual path to your certificate file
+        # Replace "certificate_path" with the actual path to your certificate file
         domain_name = "domain.com"
         certificate_path = f"/etc/nginx/ssl/{domain_name}.crt"
 
