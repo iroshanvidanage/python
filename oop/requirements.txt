@@ -1,0 +1,5 @@
+# python modules with version
+# module_name == version
+
+setuptools
+autopep8

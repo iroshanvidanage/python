@@ -1,6 +1,22 @@
 # Python OOP
 
 
+## Create a virtual env
+
+```shell
+python3 -m venv <path_to_name>
+deactivate
+source <path_to_name>/bin/activate
+```
+
+### Install packages in v_env
+
+- Use the following code to install the required modules in the virtual env.
+- [requirements.txt](./requirements.txt)
+- `python3 -m pip install -r requirements.txt`
+- Execute python commands from shell.
+    - `python3 -c "import Cars"`
+
 ## Packages
 
 - A collection of relatable modules.
