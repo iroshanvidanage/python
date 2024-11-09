@@ -35,7 +35,7 @@ source <path_to_name>/bin/activate
 
 - Packaging a python app requires following:
     - Python modules or packages
-    - pyproject.toml file
+    - [pyproject.toml file](./packaging/pyproject.toml)
     - A build front-end
     - A build back-end
 

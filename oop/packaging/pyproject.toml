@@ -1,0 +1,18 @@
+[project]
+name = "name_of_the_app"
+verion = "version"
+dependecies = [
+    "Flask",
+    "Pillow"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.autopep8]
+max_line_length = 120
+in-place = true
+recursive = true
+aggresive = 3
+exclude = "*/build/**,*.egg-info"
