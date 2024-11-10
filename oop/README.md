@@ -56,3 +56,23 @@ source <path_to_name>/bin/activate
 - List, dictionary and Sets.
 - [comprehensions.py](./comprehensions.py)
 
+
+## Exceptions
+
+- Python raises exceptions when there are excpetions to the expected code-flow. There are two main exceptions:
+    - Syntax Errors
+    - Runtime Exceptions
+- Ex: `SyntaxError`, `ValueError`, `FileNotFoundError` etc...
+- Exceptions are python objects.
+- When there's an error and we can use `raise` keyword to raise and `Exception`.
+\
+&nbsp;
+- Exceptions are raised when the code cannot recover from a situation and don't know how to proceed, we can use exceptions to recover the code and proceed with the flow.
+- Can be used for autohealing.
+\
+&nbsp;
+- Can use multiple excaptions in a single try-except block.
+- Or can consolidate into a single exception and return a single output.
+- In exceptions we can bound a name to the exception raised and use it later in the code.
+- Custom exceptions can be created by creating a new class and inheriting the `Exception` class.
+- [exceptions.py](./exceptions.py)
