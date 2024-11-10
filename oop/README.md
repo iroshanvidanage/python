@@ -87,3 +87,9 @@ source <path_to_name>/bin/activate
 - Not all exceptions require the original exception to be chained.
 - Passing a None value to from keyword causes the original exception to be suppressed.
 - [reraise_exceptions.py](./reraise_exceptions.py)
+\
+&nbsp;
+- The class hierarchy for built-in [exceptions](https://docs.python.org/3/library/exceptions.html#exceptions-heirarchy).
+- The [BaseException](https://docs.python.org/3/library/exceptions.html#eBaseException).
+- Exception handling in 3rd-party applications using heirarchy, [Example](https://github.com/pallets/flask/blob/36af821edf741562cdcb6c60d63f23fa9a1d8776/src/flask/cli.py#L122).
+
