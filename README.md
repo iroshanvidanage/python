@@ -65,6 +65,7 @@
 ### gitlab_proj
 
 - A project created with along side of GitLab CI pipeline automation.
+- Read more [here](./gitlab_proj/README.md).
 
 ### hackerrank
 
