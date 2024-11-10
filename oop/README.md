@@ -73,6 +73,17 @@ source <path_to_name>/bin/activate
 &nbsp;
 - Can use multiple excaptions in a single try-except block.
 - Or can consolidate into a single exception and return a single output.
+- In exception handling you can catch multiple exceptions by puting them in a tuple.
+    - `except (ValueError, ZeroDivisionError)`
 - In exceptions we can bound a name to the exception raised and use it later in the code.
 - Custom exceptions can be created by creating a new class and inheriting the `Exception` class.
 - [exceptions.py](./exceptions.py)
+\
+&nbsp;
+- Re-raising exceptions, raising more specific exceptions, and exception chaining helps to prevent ineffective handlers.
+- It's not always clear how to handle an exception; however they should almost never be uused to silence exceptions.
+- If a handler cannot effectively handle the exceptional condition it should be re-raised.
+- Exceptions that remain unhandled all the way back through the call stack indicate ineffective or missing handlers.
+- Not all exceptions require the original exception to be chained.
+- Passing a None value to from keyword causes the original exception to be suppressed.
+- [reraise_exceptions.py](./reraise_exceptions.py)
