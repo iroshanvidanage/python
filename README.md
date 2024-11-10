@@ -90,6 +90,11 @@
 
 - Few test scripts written to tests the module import and class inheritance in python.
 
+### object oriented programming
+
+- This is following the Python Developer course offered in cloudacademy by Ben Lambert
+- Read more [here](./oop/README.md).
+
 ### zoomiTest
 
 - My first programming interview questions.
