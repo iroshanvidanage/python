@@ -48,3 +48,11 @@ source <path_to_name>/bin/activate
 
 - random.py
     - used to generate random data, but it's a psuedo randomness, better not use in crucial randomness is needed.[]
+
+
+## Comprehensions
+
+- A shorthand style of syntax that can be replaced for for_loops with a sinngle line of code.
+- List, dictionary and Sets.
+- [comprehensions.py](./comprehensions.py)
+
