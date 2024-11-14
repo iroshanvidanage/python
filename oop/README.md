@@ -93,3 +93,21 @@ source <path_to_name>/bin/activate
 - The [BaseException](https://docs.python.org/3/library/exceptions.html#eBaseException).
 - Exception handling in 3rd-party applications using heirarchy, [Example](https://github.com/pallets/flask/blob/36af821edf741562cdcb6c60d63f23fa9a1d8776/src/flask/cli.py#L122).
 
+
+## Classes
+
+- The `self` attribute is bound to the instance of the that class.
+- What ever in that first spot will be bound to the the current object from the python runtime.
+- Two types of attributes.
+    - Class attributes.
+    - Instance attributes.
+\
+&nbsp;
+- In a class no need to define the attributes beforehand (class attributes), just put them inside the `__init__` method and it can be used in the other methods. This is called instance attribute defining.
+- Instance attributes can be defined inside methods, but better to initialze them when the object was created, these attributes can used as global class attributes.
+- `__init__` method is reffered to as a constructor.
+\
+&nbsp;
+- Two types of methods.
+    - Class methods: Linked to the type and have access to class attributes and other class methods.
+    - Instance methods: Linked to an object instance and have access to both class and instance attributes and methods.
