@@ -202,3 +202,14 @@ class Square(Shape): ...
 
 - The NormalizedDict uses single inheritance to take on the behoaviours of the built-in dictionary. Inside the `__setitem__` method the `normalize_key` function normalizes the key to lowercase alphanumeric characters. Calling `super().__setitem__` delegates responsibility to the `dict.__setitem__` method. The `__getitem__` method also delegates responsibility to the base class method of the same name.
 - `print(scores)` notice how the keys reflected are in lowercase alphanumeric characters.
+\
+&nbsp;
+- Both the NomalizedDict and AdjustedValueDict classes inherit from the built-in dict class and delegate the overriden calls to the base class.
+- The PlayerScoreDict uses multiple inheritance to combine three base classes: `NormalizedDict`, `AdjustedValueDict` and `collections.defaultdict`.
+- Each class inheirts from the dict class.
+-  `print(scores)` notice that the keys are normalized from the `NormalizedDict` class. The Values are adjusted by a factor of 1_000 from the `AdjustedValueDict` class. The `defaultdict` ensures that using the dictionary lookup syntax for the key 'MISSING' returns a default value rather than raising an exception.
+- The `PlayerScoreDict` class takes ib tge functionality from each base class. This is possible due to using super for method delegation.
+
+`[<class '__main__.PlayerScoreDict'>, <class '__main__.NormalizedDict'>, <class '__main__.AdjustedValueDict'>, <class 'collections.defaultdict'>, <class 'dict'>, <class 'object'>]`
+- Each base class has the same parentage, the mro matches the order that base classes are defined. Each base class delegates it's calls to its base class. **This ensures that the functionality of each base class is applied before delegating to the next base class**.
+- Using multiple inheritance as a method delegation mechanism can produce more maintainable and reusable code. This design style requires careful consideration for method signatures. Derived classes must be able to provide the required arguments to multiple base classes.
