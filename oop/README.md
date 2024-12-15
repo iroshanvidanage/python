@@ -213,3 +213,16 @@ class Square(Shape): ...
 `[<class '__main__.PlayerScoreDict'>, <class '__main__.NormalizedDict'>, <class '__main__.AdjustedValueDict'>, <class 'collections.defaultdict'>, <class 'dict'>, <class 'object'>]`
 - Each base class has the same parentage, the mro matches the order that base classes are defined. Each base class delegates it's calls to its base class. **This ensures that the functionality of each base class is applied before delegating to the next base class**.
 - Using multiple inheritance as a method delegation mechanism can produce more maintainable and reusable code. This design style requires careful consideration for method signatures. Derived classes must be able to provide the required arguments to multiple base classes.
+
+
+### Mixins
+
+- Mixins are another common use case for multiple inheritance in Python. Mixins are not intended to be instantiated and used directly. They're used to provide required functionality to derived classes.
+- For example, an authentication mixin might add user authentication functionality to classes used for handling web requests.
+- In the `AuthMixin` class `self.header` in the `is_authenticated` method, this attribute is not defined as part of the `AuthMixin` class. Mixin classes enhance derived classes and are not intended to be used as standalone classes. The `AuthMixin` class requires that derived classes include a header attribute.
+- The `JSONMixin` class is used to convert JSON data into Python objects if the reuest type is `application/json`.
+- The `Request` class inherits from both mixin classes. The process method uses mixin methods to perform authentication and deserialization.
+
+> [!IMPORTANT]
+> Carefully designed mixins can prevent the risk of ambiguous method resolution by providing a limited number of very specific methods.
+
