@@ -189,5 +189,16 @@ class Square(Shape): ...
 \
 &nbsp;
 - Multiple inheritance is omitted in many other programming languages/runtimes due to the potential method resolution ambiguity. Effective multiple inheritance requires careful ddesign in order to avoid tangled object heirarchies that are difficult to maintain. Two common use cases for mutiple inheritance include method delegation and mixins.
-- Method delegation can assist with the diamond problem by delegating method calls to base classes. The built-in super callable used with single inheritance returns the base class. When used with multiple inheritance the super callable demonstrates its true power.
 
+
+### Method delegation
+
+- Method delegation can assist with the diamond problem by delegating method calls to base classes. The built-in super callable used with single inheritance returns the base class. When used with multiple inheritance the super callable demonstrates its true power.
+- Consider the following goal: create a dictionalry that normalizes keys as lowercase alphanumeric characters. this can be easily accomplished by useing the built-in dict type as a base class.
+- The NormalizedDict class overrides the `__setitem__` and `__getitem__` magic methods and delegates to the base class.
+
+> [!NOTE]
+> New to magic methods? Learn how to make objects behave nore like built-in objects using magic methods.
+
+- The NormalizedDict uses single inheritance to take on the behoaviours of the built-in dictionary. Inside the `__setitem__` method the `normalize_key` function normalizes the key to lowercase alphanumeric characters. Calling `super().__setitem__` delegates responsibility to the `dict.__setitem__` method. The `__getitem__` method also delegates responsibility to the base class method of the same name.
+- `print(scores)` notice how the keys reflected are in lowercase alphanumeric characters.
