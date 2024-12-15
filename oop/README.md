@@ -152,3 +152,42 @@ class Square(Shape): ...
 &nbsp;
 - The built-in `issubclass` callable is used to determine if one type is a subclass of another. The term subclass indicates that a type is derived from another class at some point in the heirarchy.
 - the built-in `isinstance` callable is used to determine if an instance has a specific type. The isinstance callable returns True if the type of the provided object instance inherits one of the specified types at some point in the heirarchy. The isinstance callble accepts an object instance and a type or tuple of types.
+
+
+### Multiple Inheritance
+
+- Single inheritance represents a chain of base classes. The runtike searches for methods in a specific order. First the current class is checked before working up through the heirarchy all the way up to the root object base class. The conceptual simplicity of single inheritance makes it relatively intuitive to understand.
+- Multiple inheritance is a far less straightforward concept which requires careful design to avoid common pitfalls. Many programming languages/runtimes are intentionally limited to single inheritance to avoid the potential complexity. Multiple base classes might include implementations of the same method.
+\
+&nbsp;
+- Both B and C are derived from class A. Class D is derived from both B and C.
+- When the run method is called for an instance of class D which implementation of run should be called?
+- This is commonly referred to as the Diamond problem
+- `D().run()` Notice that the runtime called the method from the class C.
+- `E().run()` the runtime called the method from the class B.
+- The runtime includes logic to determine the order that base classes are checked for a requested method. This is referred to as the *method resolutio order* (**mro**).
+- Every object type includes a list of base classes representing the method resolution order.
+- The runtime inclused mechanisms used to determine the resolution order. Object types include a class method named `mro` and a class attribute named `__mro__`.
+- The mro method returns a list of base classed in resolution order. The `__mro__` attribute includes the same information as a tuple.
+\
+&nbsp;
+- Notice the mro, the runtime first checks for methods on the calling class before moving through the other classes. The runtime uses the C3 linearization algorithm.
+
+> [!IMPORTANT]
+> Guido van Rossum the creater of Python describes C3 thusly:
+> Basically, the idea behind C3 is that if you write down all of the ordering rules imposed by inheritance relationships in a complex class hierarchy, the algorithm will determine a monotonic ordering of the classes that satisfies all of them. If such an ordering can not be determined, the algorithm will fail.
+
+- Below is a summary of how it imapcts the mro.
+ 
+    - Derived classes are checked before base classes.
+    - Classes inheriting from multiple base classes maintain the base class order specified in the class defintion.
+    - Class are never repeasted.
+    - Replace the class definition dor A with the following code.
+
+`[<class '__main__.D'>, <class '__main__.C'>, <class '__main__.B'>, <class '__main__.A'>, <class 'object'>]`
+- Notice that the A class is only specified once even though both B and C inherit from the A class.
+\
+&nbsp;
+- Multiple inheritance is omitted in many other programming languages/runtimes due to the potential method resolution ambiguity. Effective multiple inheritance requires careful ddesign in order to avoid tangled object heirarchies that are difficult to maintain. Two common use cases for mutiple inheritance include method delegation and mixins.
+- Method delegation can assist with the diamond problem by delegating method calls to base classes. The built-in super callable used with single inheritance returns the base class. When used with multiple inheritance the super callable demonstrates its true power.
+
