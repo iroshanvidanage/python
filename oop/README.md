@@ -241,3 +241,13 @@ class Square(Shape): ...
 - The `Renderable` class cannot be directly instantiated. It must be derived and its abstract methods must be implemented.
 - It ensures that classes with `Renderable` in the base class hierarchy msut be implement the render method.
 
+
+### Composition
+
+- Object inheritance is a core aspect of oop. It's used inside the Python runtime by every object execpt for the root type named object. Object composition is another aspect of object oriented programming. Composition consists of accessing the functionality from other object types through attributes. Where inherited objects have an is a relationship, composite object are more of a has a relationship.
+- Composition consists of interacting with other object types through attributes. Composite classes leverage the functionality of the classes without augmentation. Unlike inherited classes which allow derived classes to augment the functionality of the base class.
+- The code in [composite_classes.py](composite_classes.py) demonstrates composition by modeling a rudimentary company. The mode is composed of the following classes: `Employee`, `Department`, and `Company`. The `Company` class is composed from the other two classes.
+- The `Employee` class is composed of the built-in str type and itself. The `manager` attribute is a reference to another instance of `Employee`.
+
+`C suite: [Q Q, R R, S S] Departments: [HR: headed by: Y Y. Team: [A A, B B], DEV: headed by: Z Z. Team: [C C, D D]]`
+
