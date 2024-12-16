@@ -6,16 +6,21 @@
 ```shell
 python3 -m venv <path_to_name>
 deactivate
+# activate the virtual env
 source <path_to_name>/bin/activate
 ```
 
 ### Install packages in v_env
 
 - Use the following code to install the required modules in the virtual env.
+- `python3 -m pip install --upgrade pip` can use `> /dev/null` to nullify the output.
 - [requirements.txt](./requirements.txt)
 - `python3 -m pip install -r requirements.txt`
 - Execute python commands from shell.
     - `python3 -c "import Cars"`
+
+> [!CAUTION]
+> To delete the v_env `python3 -d <path_to_name>`
 
 ## Packages
 
