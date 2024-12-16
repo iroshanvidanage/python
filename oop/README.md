@@ -226,3 +226,18 @@ class Square(Shape): ...
 > [!IMPORTANT]
 > Carefully designed mixins can prevent the risk of ambiguous method resolution by providing a limited number of very specific methods.
 
+
+### Abstract Base Classes
+
+- Not all base classes provide their own implementations. SOme base classes are intended to serve as interfaces for developers to override. This type of base class is referred to as an abstract base class.
+- Abstract base classes define an interface that derived classes must implement.
+
+> [!ERROR]
+> `TypeError: Can't instantiate abstract class Text with abstract method render`
+
+- The derived class must implement the interface in the abstract base class.
+- The standard library includes a module named abc used for creating abstract base classes.
+- The `Renderable` class derives from the ABC (Abstract BaseClass) type and uses the abstract method decorator to mark the render method as abstract.
+- The `Renderable` class cannot be directly instantiated. It must be derived and its abstract methods must be implemented.
+- It ensures that classes with `Renderable` in the base class hierarchy msut be implement the render method.
+
