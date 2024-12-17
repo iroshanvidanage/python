@@ -10,3 +10,6 @@
 venv
 
 */flake_reports
+
+# exclude lib cache
+*/__pycache__
