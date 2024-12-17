@@ -237,7 +237,7 @@ class Square(Shape): ...
 - Not all base classes provide their own implementations. SOme base classes are intended to serve as interfaces for developers to override. This type of base class is referred to as an abstract base class.
 - Abstract base classes define an interface that derived classes must implement.
 
-> [!ERROR]
+> [!WARNING]
 > `TypeError: Can't instantiate abstract class Text with abstract method render`
 
 - The derived class must implement the interface in the abstract base class.
@@ -280,7 +280,7 @@ class Square(Shape): ...
 > Defined in the `__init__.py` is a function named display that prints two values separated by tabs. The display function is used in here to show a Python expression on the left and the expression's result on the right.
 
 
-> [!NOTE]
+> [!TIP]
 > Need to run the following command from the parent folder `pythons -m oop.magic_methods`
 
 ### Introduction
