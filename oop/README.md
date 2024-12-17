@@ -271,3 +271,5 @@ class Square(Shape): ...
 [dev_conf.json](dev_conf.json)
 [dev_conf.py](dev_conf.py)
 
+- Both implementations produce the same output however, the function-based approach is more simple implementation. Simple code reduces the surface area for bugs to hide as well as maintenance burdens.
+
