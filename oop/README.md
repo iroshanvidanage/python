@@ -273,3 +273,10 @@ class Square(Shape): ...
 
 - Both implementations produce the same output however, the function-based approach is more simple implementation. Simple code reduces the surface area for bugs to hide as well as maintenance burdens.
 
+
+## Magic Methods
+
+> [!NOTE]
+> Defined in the `__init__.py` is a function named display that prints two values separated by tabs. The display function is used in here to show a Python expression on the left and the expression's result on the right.
+
+- 
