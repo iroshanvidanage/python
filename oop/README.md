@@ -279,4 +279,35 @@ class Square(Shape): ...
 > [!NOTE]
 > Defined in the `__init__.py` is a function named display that prints two values separated by tabs. The display function is used in here to show a Python expression on the left and the expression's result on the right.
 
-- 
+
+> [!NOTE]
+> Need to run the following command from the parent folder `pythons -m oop.magic_methods`
+
+### Introduction
+
+- Objects interact with the Python language syntax and runtime in different ways.
+
+```py
+# Operators
+a = 100 > 42
+b = 40 + 2
+
+# Checking and object's truthiness
+scores = [100, 64, 85, 39, 74]
+if scores:
+    sum(scores)
+
+# Using an object as a context manager
+with open('file', 'w') as f:
+    f.write('hey')
+
+# Converting object types
+amount = float(input('Enter an amount to wager >'))
+```
+
+
+
+- Python objects include specially named methods that allow control over these types of interactions. These are commonly referred to as magic methods of dunder methods.
+- Most common magic ( dunder ) method is `__init__`. This constructor is responsible for performing object initialization. the `__init__` method is called by the runtime when an object is created.
+- Some magic methods such as `__init__` allow for developer defined method parameters. Others such as `__str__` method must use a fixed method signature.
+
