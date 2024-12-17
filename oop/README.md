@@ -325,3 +325,6 @@ str(account_b)          <__main__.Account object at 0x7fa3070b3820>
 str(account_a)          account: savings balance: 200.42
 str(account_b)          account: checking balance: 400.42
 ```
+
+- The `__str__` method is also useful for debugging using the built-in print callable.
+- The `__int__` and `__float__` methods are used to convert objects into int and float types.
