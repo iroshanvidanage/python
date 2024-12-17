@@ -13,7 +13,7 @@ source <path_to_name>/bin/activate
 ### Install packages in v_env
 
 - Use the following code to install the required modules in the virtual env.
-- `python3 -m pip install --upgrade pip` can use `> /dev/null` to nullify the output.
+- `python3 -m pip install --upgrade pip` can use `> /dev/null` to nullify the
 - [requirements.txt](./requirements.txt)
 - `python3 -m pip install -r requirements.txt`
 - Execute python commands from shell.
@@ -255,4 +255,19 @@ class Square(Shape): ...
 - The `Employee` class is composed of the built-in str type and itself. The `manager` attribute is a reference to another instance of `Employee`.
 
 `C suite: [Q Q, R R, S S] Departments: [HR: headed by: Y Y. Team: [A A, B B], DEV: headed by: Z Z. Team: [C C, D D]]`
+
+
+## Summary on Classes
+
+- OOP consists of bundling data and code together into a single entity referred to as an object. Objects are the atomic building block of the python runtime. Object inheritance is a core aspect of oop. Inheritance allows classes to derive behaviors from other classes to form object hierarchies.
+- All objects inside of the Python runtime inherit from the built-in object type at the top of the hierarchy. the object type contains attributes that are common to all other types. Python supports both single and multiple inheirtance. Single inheritance forms a chain of derived/base classes where each object inherits from a single base class. Multiple inheirtance allows derived classes to inherit from mutiple base classes.
+- Multiple inheirtance introduces complexity in the form of potentially ambiguous mro and maintenance challenges. Careful design considerations are required with mutiple inheritance to avoid these common pitfalls. multiple inheritance is commonly used for mixins and method delegation.
+- Mixins are base classes which are not intended to be instantiated directly. they're used to provide commonly required functionality to derived classes. Commonly web applocation frameworks leverage mixins to provide functionality such as authentication inside the context of a web request.
+- Method delegation leverages the built-in super callable to delegate calls to the next base class in the method resolution hierarchy. Using multiple imheirtance for delegation requires knowledge of the base classes. Derived classes inheirting from the same base class can be chained together through method delegation. Effective method delegation requires careful consideration for method signatures.
+- Base classes without default implementations can be created using abstract base classes. Inheirting from the abs.ABC class turns a derived class into an abstract base class. The abc.abstractmethod decorator allows methods to be marked as abstract. Abstract methods must be implemented by derived classes or else an exception is raised.
+- Composition consists of interacting with other object types through attributes. Composite classes leverage the functionality of other classes without augmentation. Unlike inherited classes which allow derived classes to augment the functionality of the base class.
+- Objects are useful mechanisms for modeling real world and abstract concepts (people, places, things, text, numbers, etc...). However, not everything needs to be modeled using classes. Functions are commonly more than sufficient for a given task.
+
+[dev_conf.json](dev_conf.json)
+[dev_conf.py](dev_conf.py)
 
