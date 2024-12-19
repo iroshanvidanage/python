@@ -32,6 +32,31 @@ source <path_to_name>/bin/activate
 - Create a python file `__init__.py` and enter the code inside this file.
 - The package name is the folder name.
 
+
+### Regular package vs Namespace package
+
+- If a directory contains `__init__.py` the Python treats it as a __regular__ package.
+- If there are sub packages and modules spread across multiple directories and they don't have the dunder file in it Python treats them as __namespace__ packages.
+
+
+
+> - root_dir/
+>   -   ├── employee_sales/
+>       -   ├── department/
+>           -   ├── sales/
+>               -   ├── `__init__.py`
+>               -   └── `analytics.py`
+>       -   ├── sample/
+>       -   ├── .../
+>   -   ├── employee_hr/
+>      -    ├── department/
+>           -   ├── hr/
+>               -   ├── `__init__.py`
+>               -   └── `policies.py`
+>      -    ├── sample/
+>      -    ├── .../
+
+
 ### Application packages
 
 - Two types of packages:
