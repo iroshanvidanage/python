@@ -38,8 +38,6 @@ source <path_to_name>/bin/activate
 - If a directory contains `__init__.py` the Python treats it as a __regular__ package.
 - If there are sub packages and modules spread across multiple directories and they don't have the dunder file in it Python treats them as __namespace__ packages.
 
-
-
 > - root_dir/
 >   -   ├── employee_sales/
 >       -   ├── department/
@@ -55,6 +53,18 @@ source <path_to_name>/bin/activate
 >               -   └── `policies.py`
 >      -    ├── sample/
 >      -    ├── .../
+
+- What happens is that when python search through the project directory; as an example import sample, first it searches for a regular package.
+- If it couldn't find a regular package but finds a `sample.py` it imports as a module.
+- If neither of them were found but instead finds 1 or more directories named sample it creates a namespace package by combining the folders.
+
+```shell
+# if a regular package or a module is found it'll be stopped at this first line
+>>> from this import sample
+# if namespaces were created
+>>> sample.__path__
+>>>['root_dir/employee_sales/sample', 'root_dir/employee_hr/sample']
+```
 
 
 ### Application packages
