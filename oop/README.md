@@ -363,3 +363,4 @@ str(account_b)          account: checking balance: 400.42
 
 - The `__str__` method is also useful for debugging using the built-in print callable.
 - The `__int__` and `__float__` methods are used to convert objects into int and float types.
+- The `__repr__` method is similar to the `__str__` method except that `__repr__` is intended for developers. The `__repr__` method commonly displays a string representing the code required to recreate the object. Passing an object to the built-in `repr` function calls the objects `__repr__` method.

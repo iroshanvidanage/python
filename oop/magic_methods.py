@@ -16,6 +16,9 @@ class Account:
 
     def __int__(self) -> int:
         return int(self.balance)
+    
+    def __repr__(self) -> str:
+        return f'{self.__class__.__name__} ({self.balance})'
 
 
 class Person:
@@ -36,6 +39,8 @@ def demonstrate():
     display('str(account_b)', str(account_b))
     display('int(account_b)', int(account_b))
     display('float(account_b)', float(account_b), indent=1)
+    display('repr(account_a)', repr(account_a))
+
 
 
 if __name__ == '__main__':
