@@ -495,3 +495,8 @@ if some_object == True:
 if some_object:
     do_something()
 ```
+
+
+## Summary on Magic Methods
+
+- Magic methods should be used to allow user-defined objects to behanve more like built-in objects. They allow objects to interact with the runtime and language syntax in a more Pythonic manner. A wide range of methods exist for performing actions such as overriding operators.
