@@ -409,6 +409,7 @@ if not condition:
 - Objects in Python process a quality called truthiness that determines if the object represents a bool value of *True* or *False*.
 - It is determined by one of two possible methods: `__bool__` or `__len__`. If the `__bool__` method is implemented the runtime uses it to determine truthiness. The `__len__` method is used as a fallback. 
 - All built-in object types include truthiness logic. Numeric zero values and empty sequences evaluate as *False*
+- Example code can be found in [truthiness.py](truthiness.py)
 
 > [!NOTE]
 > User-defined objects omitting both magic methods evaluate as True.
