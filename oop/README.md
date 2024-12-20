@@ -444,3 +444,53 @@ accs is True
 Called the __len__ method.
 accs is False
 ```
+- The `Account` objects in the `Accounts` constructor will be evaluted as *True* now that accounts exists in the list.
+- The `__len__` method works best for objects with a natural representation of length, and works well with sequences. May not work for all objects.
+\
+&nbsp;
+- The `__bool__` method provides more precise control over an object's truthiness.
+- The below returns only if the account object has the attribute active set as True
+
+```py
+any(a for a in self.accs if a.active)
+```
+
+- With the above implementation, now it evaluates as *False*, and making one account *active*=**True** evaluates as True.
+```shell
+Primary Secondary
+Called the __bool__ method.
+accs is True
+Called the __len__ method.
+accs contains 2 accounts
+```
+
+> [!NOTE]
+> Having finite control over an object's truthiness reduces the amount of code required to perform boolean operations.
+
+- Truthiness also allows conditional name bindings using the *or* operator.
+- In the below example the `name` keyword defaults to `None` which evaluates as *False*. The line `name = name or 'Human'` instructs the runtime to assign the name binding to itself if it evaluates as *True* otherwise use the value following the *or* operator.
+
+```py
+def some_function(name=None) -> None:
+    name = name or 'Human'
+
+# the same can be written as (the longhand syntax)
+
+def some_function(name=None) -> None:
+    if name is None:
+        name = 'Human'
+```
+
+- An aside on boolean expressions Developers commonly perform boolean comparisons using code similar to the following:
+
+```py
+if some_object == True:
+    do_something()
+```
+
+- Directly comparing an object to *True* is overly verbose and unnecessary. It can be consolidated to:
+
+```py
+if some_object:
+    do_something()
+```
