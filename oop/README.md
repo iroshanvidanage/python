@@ -389,3 +389,15 @@ assert p_a == p_c
 assert p_a != p_b
 ```
 
+
+> [!NOTE]
+> The assert statement has two main uses:
+> > 1. It helps detect problems early in the program, where the cause is clear, rather than later when some other operation fails.
+> > 2. Works as a documentation for other developers.
+
+```py
+assert condition
+# the above can be written as below
+if not condition:
+    raise AssertionError()
+```
