@@ -402,3 +402,45 @@ assert condition
 if not condition:
     raise AssertionError()
 ```
+
+
+### Truthiness
+
+- Objects in Python process a quality called truthiness that determines if the object represents a bool value of *True* or *False*.
+- It is determined by one of two possible methods: `__bool__` or `__len__`. If the `__bool__` method is implemented the runtime uses it to determine truthiness. The `__len__` method is used as a fallback. 
+- All built-in object types include truthiness logic. Numeric zero values and empty sequences evaluate as *False*
+
+> [!NOTE]
+> User-defined objects omitting both magic methods evaluate as True.
+
+- Truthiness of built-in types:
+```py
+assert not None
+assert not bool(0)
+assert bool(1)
+assert bool(-1)
+assert not bool('')
+assert not bool([])
+assert bool([1])
+assert not bool({})
+assert bool({0:0})
+assert not bool(set())
+assert bool(set([1]))
+assert not bool(range(0))
+assert bool(range(1))
+```
+
+
+- The `__len__` method is determines the length of an object via the built-in len callable. the `__len__` method is expected to return an *int* value greater than or equal to zero.
+- This method is used as a fallback for determining truthiness if the `__bool__` method is not implemented. A value of zero evaluates as *False* otherwise *True*.
+\
+&nbsp;
+- Initially since none of the methods are implemented in the `Accounts` class, it evaluates as *True*. 
+```shell
+accs is True
+```
+- After the `__len__` method is implemented, it evaluates as *False*.
+```shell
+Called the __len__ method.
+accs is False
+```
