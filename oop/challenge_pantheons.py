@@ -32,6 +32,13 @@ class Deity:
     
     def attack(self, other):
         other.health -= randint(0, 100)
+    
+    #### answers
+    def __int__(self):
+        return self.health
+    
+    def __bool__(self):
+        return self.health > 0
 
 
 
@@ -45,6 +52,10 @@ class Pantheon:
         for deity in self.deities:
             if deity:
                 yield deity
+
+    #### answers
+    def __bool__(self):
+        return any(deity for deity in self.deities if deity)
 
 
 
@@ -81,6 +92,7 @@ def play(player_a: Player, player_b: Player):
 
 
 if __name__ == '__main__':
+    
     player_a: Player = Player(
         'Thunder',
         Pantheon(
@@ -98,3 +110,5 @@ if __name__ == '__main__':
             Deity('Orion')
         )
     )
+
+    play(player_a, player_b)
