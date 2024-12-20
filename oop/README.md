@@ -367,3 +367,25 @@ str(account_b)          account: checking balance: 400.42
 - The `__int__` and `__float__` methods are used to convert objects into int and float types.
 - The `__repr__` method is similar to the `__str__` method except that `__repr__` is intended for developers. The `__repr__` method commonly displays a string representing the code required to recreate the object. Passing an object to the built-in `repr` function calls the objects `__repr__` method.
 - The `__repr__` is called by other built-in callables, print and format may call `__repr__` method as a fallback if no `__str__` method exists.
+\
+&nbsp;
+- Comparison methods allow objects to be compared using operators.
+- The `__eq__`, `__lt__`, `__le__`, `__gt__`, `__ge__` methods in this example [magic_methods.py](magic_methods.py) uses numeric comparisons and are not limited to numeric comparisons, these methods are intended to allow objects to be compared in a natural manner.
+- The class `Player` is an example implementation of the equality method to compare str values.
+
+```py
+class Player:
+    def __init__(self, handle):
+        self.handle = handle
+
+    def __eq__(self, other):
+        return self.handle == other.handle
+    
+p_a: Player = Player('smasher')
+p_b: Player = Player('crasher')
+p_c: Player = Player('smasher')
+
+assert p_a == p_c
+assert p_a != p_b
+```
+

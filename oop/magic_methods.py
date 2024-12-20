@@ -19,15 +19,38 @@ class Account:
     
     def __repr__(self) -> str:
         return f'{self.__class__.__name__} ({self.balance})'
+    
+    def __eq__(self, other):
+        return self.balance == other.balance
+    
+    def __lt__(self, other):
+        return self.balance < other.balance
+    
+    def __le__(self, other):
+        return self.balance <= other.balance
+    
+    def __gt__(self, other):
+        return self.balance > other.balance
+    
+    def __ge__(self, other):
+        return self.balance >= other.balance
 
 
 class Person:
     def __init__(self, name: str, surname: str = None) -> None:
         self.name = name
         self.surname = surname
-    
+
     def __str__(self) -> str:
         return f'{self.name} {self.surname or ""}'
+
+
+class Player:
+    def __init__(self, handle):
+        self.handle = handle
+
+    def __eq__(self, other):
+        return self.handle == other.handle
 
 
 def demonstrate():
@@ -41,6 +64,12 @@ def demonstrate():
     display('float(account_b)', float(account_b), indent=1)
     display('repr(account_a)', repr(account_a))
 
+    display('account_a > account_b', account_a > account_b, indent=1)
+    display('account_a < account_b', account_a < account_b, indent=1)
+    display('account_a >= account_b', account_a >= account_b, indent=1)
+    display('account_a <= account_b', account_a <= account_b, indent=1)
+    display('account_a == account_b', account_a == account_b, indent=1)
+    display('account_a != account_b', account_a != account_b, indent=1)
 
 
 if __name__ == '__main__':
@@ -48,3 +77,9 @@ if __name__ == '__main__':
     p = Person('Ada', 'Lovelace')
     print(p)
 
+    p_a: Player = Player('smasher')
+    p_b: Player = Player('crasher')
+    p_c: Player = Player('smasher')
+
+    assert p_a == p_c
+    assert p_a != p_b
