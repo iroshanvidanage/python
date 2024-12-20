@@ -345,8 +345,10 @@ amount = float(input('Enter an amount to wager >'))
 - Python objects include specially named methods that allow control over these types of interactions. These are commonly referred to as magic methods of dunder methods.
 - Most common magic ( dunder ) method is `__init__`. This constructor is responsible for performing object initialization. the `__init__` method is called by the runtime when an object is created.
 - Some magic methods such as `__init__` allow for developer defined method parameters. Others such as `__str__` method must use a fixed method signature.
-\
-&nbsp;
+
+
+### Magic Methods
+
 - The `display` outputs a ruintime specific string representation. This default representations displays the module and class name followed by the object's memory address.
 - The `__str__` method is used to convert an object into a str representation when passed to the built-in str, print, and format callables.
 - Implementing the `__str__` method is useful when working with objects that have a natural str representations.
@@ -364,3 +366,4 @@ str(account_b)          account: checking balance: 400.42
 - The `__str__` method is also useful for debugging using the built-in print callable.
 - The `__int__` and `__float__` methods are used to convert objects into int and float types.
 - The `__repr__` method is similar to the `__str__` method except that `__repr__` is intended for developers. The `__repr__` method commonly displays a string representing the code required to recreate the object. Passing an object to the built-in `repr` function calls the objects `__repr__` method.
+- The `__repr__` is called by other built-in callables, print and format may call `__repr__` method as a fallback if no `__str__` method exists.
