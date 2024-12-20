@@ -5,9 +5,9 @@ class Account:
         self.name = name
         self.active = active
 
-    
+
 class Accounts:
-    def __init__(self, *accounts):
+    def __init__(self, *accounts) -> None:
         self.accs = list(accounts)
 
     def __len__(self):
