@@ -1,7 +1,7 @@
 from . import display # imports from __init__.py
 
 class Account:
-    def __init__(self):
+    def __init__(self) -> None:
         print('New account initialized.')
     
     def __init__(self, name: str, balance: float =0) -> None:
