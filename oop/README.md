@@ -394,6 +394,7 @@ assert p_a != p_b
 > The assert statement has two main uses:
 > > 1. It helps detect problems early in the program, where the cause is clear, rather than later when some other operation fails.
 > > 2. Works as a documentation for other developers.
+> As references [Simple statements](https://docs.python.org/3/reference/simple_stmts.html) & [Assertion in Python](https://pythongeeks.org/assertion-in-python/)
 
 ```py
 assert condition
