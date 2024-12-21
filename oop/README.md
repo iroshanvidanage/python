@@ -517,6 +517,8 @@ if some_object:
 
 - [Library Management System](challenge_libraryms.py)
     - Create a class structure for a simple library management system. The system should allow adding new books, borrowing books, and returning books.
+    - Try to pass the `title` of the book as a string.
+    - Add a book search method to look up for books by title using list comprehension.
 ```py
 class Book:
     def __init__(self, title, author):
