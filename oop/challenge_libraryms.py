@@ -63,24 +63,29 @@ class Library:
 
 
 # Example Usage
-library = Library()
-book1 = Book("The Catcher in the Rye", "J.D. Salinger")
-book2 = Book("To Kill a Mockingbird", "Harper Lee")
+def test_example():
+    library = Library()
+    book1 = Book("The Catcher in the Rye", "J.D. Salinger")
+    book2 = Book("To Kill a Mockingbird", "Harper Lee")
 
-library.add_book(book1)
-library.add_book(book2)
+    library.add_book(book1)
+    library.add_book(book2)
 
-# Try borrowing and returning books
-# library.borrow_book(book1)
-# library.borrow_book(book1)
-# library.borrow_book(book2)
+    # Try borrowing and returning books
+    # library.borrow_book(book1)
+    # library.borrow_book(book1)
+    # library.borrow_book(book2)
 
-# library.return_book(book1)
-# library.return_book(book2)
-library.borrow_book("The Catcher in the Rye")
-library.borrow_book("The Catcher in the Rye")
-library.borrow_book("To Kill a Mockingbird")
+    # library.return_book(book1)
+    # library.return_book(book2)
+    library.borrow_book("The Catcher in the Rye")
+    library.borrow_book("The Catcher in the Rye")
+    library.borrow_book("To Kill a Mockingbird")
 
-library.return_book("The Catcher in the Rye")
-library.return_book("To Kill a Mockingbird")
-library.return_book("Jade Compass")
+    library.return_book("The Catcher in the Rye")
+    library.return_book("To Kill a Mockingbird")
+    library.return_book("Jade Compass")
+
+
+if __name__ == '__main__':
+    test_example()
