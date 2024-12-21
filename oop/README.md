@@ -632,3 +632,194 @@ student2 = Student("Bob", 17, "S124")
 course.add_student(student1)
 course.add_student(student2)
 ```
+
+
+## Class and Objects Practice Challenges: Intermediate Level
+
+- More challenges with a bit of extended implementations.
+- [Banking System](challenge_banking.py)
+    - Create a class structure for a simple banking system. The system should manage customers, accounts, and transactions. Implement functionality for depositing, withdrawing, and transferring funds between accounts.
+```py
+class Customer:
+    def __init__(self, name: str, email: str) -> None:
+        self.name = name
+        self.email = email
+
+    def __str__(self) -> str:
+        return f'Customer(name={self.name}, email={self.email})'
+
+class Account:
+    def __init__(self, customer: Customer, account_number: str) -> None:
+        self.customer = customer
+        self.account_number = account_number
+        self.balance = 0.0
+
+    def deposit(self, amount: float) -> None:
+        # Implement the logic to deposit funds
+
+    def withdraw(self, amount: float) -> None:
+        # Implement the logic to withdraw funds
+
+    def transfer(self, amount: float, target_account) -> None:
+        # Implement the logic to transfer funds to another account
+
+    def __str__(self) -> str:
+        return f'Account(account_number={self.account_number}, balance={self.balance})'
+
+# Example Usage
+def test_example() -> None:
+    customer1 = Customer("Alice", "alice@example.com")
+    customer2 = Customer("Bob", "bob@example.com")
+
+    account1 = Account(customer1, "12345")
+    account2 = Account(customer2, "67890")
+
+    account1.deposit(1000)
+    account1.transfer(200, account2)
+    account1.withdraw(100)
+
+    print(account1)
+    print(account2)
+
+if __name__ == '__main__':
+    test_example()
+
+```
+
+
+- [Library Management System (Extended)](challenge_ext_libraryms.py)
+    - Extend the previous library management system to include a system for managing library members, book reservations, and late fees.
+```py
+class Member:
+    def __init__(self, name: str, member_id: str) -> None:
+        self.name = name
+        self.member_id = member_id
+        self.borrowed_books = []
+
+    def borrow_book(self, book) -> None:
+        # Implement the logic to borrow a book
+
+    def return_book(self, book) -> None:
+        # Implement the logic to return a book
+
+    def __str__(self) -> str:
+        return f'Member(name={self.name}, member_id={self.member_id})'
+
+class Book:
+    def __init__(self, title: str, author: str) -> None:
+        self.title = title
+        self.author = author
+        self.is_borrowed = False
+
+    def __str__(self) -> str:
+        return f'Book(title={self.title}, author={self.author})'
+
+class Library:
+    def __init__(self) -> None:
+        self.books = []
+        self.members = []
+
+    def add_book(self, book: Book) -> None:
+        # Implement the logic to add a book to the library
+
+    def register_member(self, member: Member) -> None:
+        # Implement the logic to register a member
+
+    def reserve_book(self, book: Book, member: Member) -> None:
+        # Implement the logic to reserve a book
+
+    def __str__(self) -> str:
+        return f'Library(books={len(self.books)}, members={len(self.members)})'
+
+# Example Usage
+def test_example() -> None:
+    library = Library()
+
+    book1 = Book("1984", "George Orwell")
+    book2 = Book("The Great Gatsby", "F. Scott Fitzgerald")
+
+    member1 = Member("John", "M001")
+    member2 = Member("Jane", "M002")
+
+    library.add_book(book1)
+    library.add_book(book2)
+
+    library.register_member(member1)
+    library.register_member(member2)
+
+    member1.borrow_book(book1)
+    member2.borrow_book(book2)
+
+    print(library)
+
+if __name__ == '__main__':
+    test_example()
+
+```
+
+
+- [Employee Management System](challenge_employeems.py)
+    - Create a class structure for an employee management system. The system should manage employees, departments, and projects. Implement functionality to assign employees to departments and projects.
+```py
+class Employee:
+    def __init__(self, name: str, employee_id: str) -> None:
+        self.name = name
+        self.employee_id = employee_id
+        self.department = None
+        self.projects = []
+
+    def assign_department(self, department) -> None:
+        # Implement the logic to assign an employee to a department
+
+    def assign_project(self, project) -> None:
+        # Implement the logic to assign an employee to a project
+
+    def __str__(self) -> str:
+        return f'Employee(name={self.name}, employee_id={self.employee_id})'
+
+class Department:
+    def __init__(self, name: str) -> None:
+        self.name = name
+        self.employees = []
+
+    def add_employee(self, employee: Employee) -> None:
+        # Implement the logic to add an employee to the department
+
+    def __str__(self) -> str:
+        return f'Department(name={self.name}, employees={len(self.employees)})'
+
+class Project:
+    def __init__(self, name: str) -> None:
+        self.name = name
+        self.employees = []
+
+    def add_employee(self, employee: Employee) -> None:
+        # Implement the logic to add an employee to the project
+
+    def __str__(self) -> str:
+        return f'Project(name={self.name}, employees={len(self.employees)})'
+
+# Example Usage
+def test_example() -> None:
+    employee1 = Employee("Alice", "E001")
+    employee2 = Employee("Bob", "E002")
+
+    department = Department("Engineering")
+    project = Project("Project X")
+
+    department.add_employee(employee1)
+    project.add_employee(employee1)
+
+    department.add_employee(employee2)
+    project.add_employee(employee2)
+
+    print(department)
+    print(project)
+    print(employee1)
+    print(employee2)
+
+if __name__ == '__main__':
+    test_example()
+
+```
+
