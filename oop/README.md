@@ -552,6 +552,10 @@ library.add_book(book2)
 
 - [E-Commerce Order Processing](challenge_ecommop.py)
     - Create a class structure to represent an order processing system for an e-commerce website. The system should manage products, orders, and customers.
+    - Original implementation is okay, used type annotations for the method parameters and return types for consistency.
+    - Dict for items: If the same item was added multiple times might need to consider how to handle that.
+    - Edge cases: items without a quantity was added.
+    - String represntation: `__str__` & `__repr__` methods for readbility and debugging.
 ```py
 class Product:
     def __init__(self, name, price):
