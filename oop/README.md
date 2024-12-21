@@ -513,7 +513,7 @@ if some_object:
 - The `__str__` method originally could crash if `self.last_power` was not set because it would try to access `avatar` and `points` attributes that didn't exist. Adding a try-except block with `AttributeError` ensures the method returns a fallback message if `self.last_power` is `None`.
 
 
-## Practice Challenges
+## Class and Objects Practice Challenges: Beginer Level
 
 - [Library Management System](challenge_libraryms.py)
     - Create a class structure for a simple library management system. The system should allow adding new books, borrowing books, and returning books.
