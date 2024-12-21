@@ -511,3 +511,114 @@ if some_object:
     - It correctly assigns a `Sparkle` or `Shine` object to `self.last_power` based on the number's range.
     - It calls the `activate` method of the appropriate `Power` object.
 - The `__str__` method originally could crash if `self.last_power` was not set because it would try to access `avatar` and `points` attributes that didn't exist. Adding a try-except block with `AttributeError` ensures the method returns a fallback message if `self.last_power` is `None`.
+
+
+## Practice Challenges
+
+- [Library Management System](challenge_libraryms.py)
+    - Create a class structure for a simple library management system. The system should allow adding new books, borrowing books, and returning books.
+```py
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+        self.is_borrowed = False
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, book):
+        # Implement the logic to add a book to the library
+
+    def borrow_book(self, title):
+        # Implement the logic to borrow a book from the library
+
+    def return_book(self, title):
+        # Implement the logic to return a book to the library
+
+# Example Usage
+library = Library()
+book1 = Book("The Catcher in the Rye", "J.D. Salinger")
+book2 = Book("To Kill a Mockingbird", "Harper Lee")
+
+library.add_book(book1)
+library.add_book(book2)
+
+# Try borrowing and returning books
+```
+
+- [E-Commerce Order Processing](challenge_ecommop.py)
+    - Create a class structure to represent an order processing system for an e-commerce website. The system should manage products, orders, and customers.
+```py
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+class Customer:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+class Order:
+    def __init__(self, customer):
+        self.customer = customer
+        self.items = []
+
+    def add_item(self, product, quantity):
+        # Implement the logic to add an item to the order
+
+    def get_total(self):
+        # Implement the logic to calculate the total cost of the order
+
+# Example Usage
+customer = Customer("John Doe", "john@example.com")
+order = Order(customer)
+
+product1 = Product("Laptop", 999.99)
+product2 = Product("Mouse", 49.99)
+
+order.add_item(product1, 1)
+order.add_item(product2, 2)
+
+total = order.get_total()
+```
+
+- [School Management System](challenge_schoolms.py)
+    - Create a class structure to represent a school management system. The system should manage students, teachers, and courses.
+```py
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+class Student(Person):
+    def __init__(self, name, age, student_id):
+        super().__init__(name, age)
+        self.student_id = student_id
+
+class Teacher(Person):
+    def __init__(self, name, age, subject):
+        super().__init__(name, age)
+        self.subject = subject
+
+class Course:
+    def __init__(self, name, teacher):
+        self.name = name
+        self.teacher = teacher
+        self.students = []
+
+    def add_student(self, student):
+        # Implement the logic to add a student to the course
+
+# Example Usage
+teacher = Teacher("Mr. Smith", 40, "Mathematics")
+course = Course("Algebra 101", teacher)
+
+student1 = Student("Alice", 16, "S123")
+student2 = Student("Bob", 17, "S124")
+
+course.add_student(student1)
+course.add_student(student2)
+```
