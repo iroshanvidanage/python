@@ -500,3 +500,14 @@ if some_object:
 ## Summary on Magic Methods
 
 - Magic methods should be used to allow user-defined objects to behanve more like built-in objects. They allow objects to interact with the runtime and language syntax in a more Pythonic manner. A wide range of methods exist for performing actions such as overriding operators.
+
+
+## Challenge Sparkle & Shine
+
+- `@property`: Properties in python are typically used for attributes that need to be computed or processed everytime they are accessed, and they should not take arguments other than `self`. The `activate` method was intended to be a regular method that can take an `amplifier_callable` argument, so making it a property is incorrect.
+- The `Sparkle` and `Shine` classes had default parameters in their constructors, which weren't necessary. These classes are meant to initialize with fixed points and avatars, so simplifying them by directly passing these values to the base class `Power` makes the code cleaner and easier to understand.
+- The original `activate` method of `SuperSlothBot` had some logical issues, including improperly setting `self.last_power` and not handling out-of-range numbers correctly.
+    - It raises a `ValueError` if the number is not between 0 and 50.
+    - It correctly assigns a `Sparkle` or `Shine` object to `self.last_power` based on the number's range.
+    - It calls the `activate` method of the appropriate `Power` object.
+- The `__str__` method originally could crash if `self.last_power` was not set because it would try to access `avatar` and `points` attributes that didn't exist. Adding a try-except block with `AttributeError` ensures the method returns a fallback message if `self.last_power` is `None`.

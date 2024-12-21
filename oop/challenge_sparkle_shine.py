@@ -5,7 +5,7 @@ Implement the constructors for the Sparkle and Shine classes.
 These must call the __init__ method of the base class.
 Sparkle power is worth 2points and has an avatar of *
 Shine power is worth 3points and has an avatar of #
-The SuperSlothBot requires a class attribute named randint_gen_callable which must be bound to the radiant callable.
+The SuperSlothBot requires a class attribute named randint_gen_callable which must be bound to the randint callable.
 
 Implement the activate method of the SuperSlothBot class.
 
@@ -41,39 +41,32 @@ class Power:
     
     def activate(self, amplifier_callable: callable = randint):
         amplifier = amplifier_callable(1, 10)
-
         self.avatar = ' '.join([self.avatar] * amplifier)
         self.points *= amplifier
-
         return self.avatar, self.points
-
 
 class Sparkle(Power):
     ''' Sparkle power is worth 2points and has an avatar of * '''
-    def __init__(self, points=2, avatar='*'):
-        super().__init__(points, avatar)
-
+    def __init__(self):
+        super().__init__(points=2, avatar='*')
 
 class Shine(Power):
     ''' Shine power is worth 3points and has an avatar of # '''
-    def __init__(self, points=3, avatar='#'):
-        super().__init__(points, avatar)
+    def __init__(self):
+        super().__init__(points=3, avatar='#')
+
 
 
 class SuperSlothBot:
+    randint_gen_callable: callable = randint
 
     def __init__(self, name: str):
         '''
             Args:
                 name    | The name of the bot.
         '''
-
         self.last_power = None
         self.name = name
-    
-    @property
-    def randint_gen_callable(self):
-        ...
 
     def activate(self, number: int):
         '''
@@ -105,24 +98,36 @@ class SuperSlothBot:
             >>> str(sloth)
             'bot 01 conjours: * * * * * for a total of: 10 points.'
 
-            >>> SpuerSlothBot('bot 01').activate(-1)
+            >>> SuperSlothBot('bot 01').activate(-1)
             Traceback (most recent call last):
                 ...
             ValueError: number must be between 1-50
 
-            >>> SpuerSlothBot('bot 01').activate(101)
+            >>> SuperSlothBot('bot 01').activate(101)
             Traceback (most recent call last):
                 ...
             ValueError: number must be between 1-50
         '''
 
+        if number < 0 or number > 50:
+            raise ValueError('number must be between 1-50') from None
+
+        if 0 <= number < 25:
+            self.last_power: Sparkle = Sparkle()
+        elif 25 <= number <= 50:
+            self.last_power: Shine = Shine()
+        
+        avatar, points = self.last_power.activate(self.randint_gen_callable)
+        return avatar, points
+
+    def __str__(self):
         try:
-            if 0 <= number < 25:...
-        except ValueError:
-            ...
-
-
-def play(rounds:int =5):
+            return f'{self.name} conjours: {self.last_power.avatar} for a total of: {self.last_power.points} points.'
+        except AttributeError:
+            return 'no power is currently activated'
+    
+# Test function
+def play(rounds: int = 5):
     '''
         Make bots 1 and 2 fight.
 
@@ -171,11 +176,21 @@ def play(rounds:int =5):
     one, two = winners
 
     # For the sake of this application ties are not handled. If there's a tie, one of these bots is going to get mad!
-    print(f'''{
-        ''.join(('1st', f' place: {bots[one[0]].name} with {scores[one[0]]} points!'.title())):_^80
-        }
-    ''')
-    print(f'''{
-        ''.join(('2st', f' place: {bots[two[0]].name} with {scores[two[0]]} points!'.title())):_^80
-        }
-    ''')
+    print(f'{"1st Place: " + bots[one[0]].name + " with " + str(one[1]) + " points!":_^80}')
+    print(f'{"1st Place: " + bots[two[0]].name + " with " + str(two[1]) + " points!":_^80}')
+
+
+if __name__ == '__main__':
+    # testing
+    # SuperSlothBot.randint_gen_callable = lambda *_: 5
+    # for number in [20, 40]:
+    #     SuperSlothBot('bot 01').activate(number)
+    
+    # sloth = SuperSlothBot('bot 01')
+    # sloth.activate(10)
+    # print(str(sloth))
+
+    # SuperSlothBot('bot 02').activate(-1)
+    # print(SuperSlothBot.randint_gen_callable(0, 50))
+    play()
+    ...
