@@ -591,6 +591,10 @@ order.add_item(product2, 2)
 total = order.get_total()
 ```
 
+- Property Decorator: The `get_total` method is now decorated with `@property`, so it can be accessed as an attribute (`order.total`).
+- Consistency and Readability: Using properties can make the code more readable and consistent with how other attributes are accessed.
+\
+&nbsp;
 - [School Management System](challenge_schoolms.py)
     - Create a class structure to represent a school management system. The system should manage students, teachers, and courses.
 ```py

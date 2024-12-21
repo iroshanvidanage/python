@@ -34,6 +34,9 @@ class Order:
             total += product.price * quantity
         return total
     
+    @property 
+    def total(self) -> float: return sum(product.price * quantity for product, quantity in self.items.items())
+    
     def __str__(self) -> str: return f'Order(customer={self.customer}, items={self.items})'
 
 # Example Usage
@@ -50,6 +53,8 @@ def test_example() -> None:
 
     total = order.get_total()
     print(f"Total Order Cost: ${total:.2f}")
+
+    print(f"Total Order Cost using @property: ${order.total:.2f}")
 
 
 if __name__ == '__main__':
