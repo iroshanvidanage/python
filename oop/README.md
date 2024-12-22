@@ -687,7 +687,7 @@ if __name__ == '__main__':
 ```
 
 - The implementation is great; Optimizing tips to consider.
-- When Type annotation is done for the same Class type within the class itself need to put it within quotes. `Forward References`
+- When Type annotation is done for the same Class type within the class itself need to put it within quotes. [Forward References](#forward-references-in-class)
 - When naming methods `balance_not_sufficient` should be `is_balance_insufficient` for clarity.
 - Avoid redundency: The else statement is redundant after return statements.
 ```py
@@ -859,3 +859,25 @@ if __name__ == '__main__':
 
 ```
 
+
+## Forward References in Class
+
+- In Python, when you refer to a class that hasn't been fully defined yet or refer to the same class within a method, you use a string to specify the class name. This helps the interpreter understand the type without causing a NameError due to undefined references.
+    - When you need to reference a class within its own definition (e.g., self-referential methods).
+    - When you have a circular dependency between classes. Mutually dependent classes.
+    - When referring to a class that is defined later in the code.
+        - [Forward references](https://peps.python.org/pep-0484/).
+        - [Stack:](https://stackoverflow.com/questions/55320236/does-python-evaluate-type-hinting-of-a-forward-reference)
+- From Ptyhon 3.10 onwards, the `from __future__ import annotations` can be used to defer evaluations of type annotations, removing the need for string annotations.
+```py
+from __future__ import annotations
+
+class Account:
+    def __init__(self, customer, account_number):
+        self.customer = customer
+        self.account_number = account_number
+        self.balance = 0.0
+
+    def transfer(self, amount: float, target_account: Account) -> None:
+        pass
+```
