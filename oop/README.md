@@ -686,7 +686,43 @@ if __name__ == '__main__':
 
 ```
 
+- The implementation is great; Optimizing tips to consider.
+- When Type annotation is done for the same Class type within the class itself need to put it within quotes. `Forward References`
+- When naming methods `balance_not_sufficient` should be `is_balance_insufficient` for clarity.
+- Avoid redundency: The else statement is redundant after return statements.
+```py
+if amount <= 0:
+    print(f'Withdrawal amount should be greater than Zero')
+    return
+elif self.is_balance_insufficient(amount):
+    print(f'Remaining balance is not sufficient to withdraw.')
+    return
+else:
+    self.balance -= amount
+    print(f'Successfully withdrawed an amount of {amount}, available balance is {self.balance}.')
+    return
 
+# should be
+
+if amount <= 0:
+    print('Withdrawal amount should be greater than zero.') 
+    return
+if self.is_balance_insufficient(amount): 
+    print('Insufficient balance for withdrawal.') 
+    return 
+self.balance -= amount
+print(f'Successfully withdrew {amount}. Available balance is {self.balance}.')
+
+```
+- Edge cases should be handled correctly; When transferring check if the target account is the same as source account.
+
+
+\
+&nbsp;
+\
+&nbsp;
+\
+&nbsp;
 - [Library Management System (Extended)](challenge_ext_libraryms.py)
     - Extend the previous library management system to include a system for managing library members, book reservations, and late fees.
 ```py
