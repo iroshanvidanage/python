@@ -725,6 +725,11 @@ print(f'Successfully withdrew {amount}. Available balance is {self.balance}.')
 &nbsp;
 - [Library Management System (Extended)](challenge_ext_libraryms.py)
     - Extend the previous library management system to include a system for managing library members, book reservations, and late fees.
+    - The original code is correct, for improvements;
+    - Ensure error handling.
+    - Use set or dict structures for lookup efficiency.
+    - Try to borrow the book if the book is available and no need to wait.
+    - `from typing import List` to specify the type of the books and members attributes in the `Library` class. This makes the code more readable and helps with type checking, making it clear that these attributes are expected to be lists of `Book` and `Member` objects, respectively.
 ```py
 class Member:
     def __init__(self, name: str, member_id: str) -> None:
