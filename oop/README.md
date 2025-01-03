@@ -886,3 +886,31 @@ class Account:
     def transfer(self, amount: float, target_account: Account) -> None:
         pass
 ```
+
+
+## Decorators
+
+### Introduction
+
+- When need to extend or augment the functionality of a callable without modifying the callable itself we use decorators.
+- This is a form of metaprogramming and is accomplished by wrapping one callable with another. Wrappers sit between callers and callables and perform operations before and or after calling the wrapped callable.
+- Wrappers accept a callable object and retrun a callable matching the argument signature of the wrapped callable. The returned callable becomes the a replacement for the wrapped callable.
+- Functions and methods are both callable objects.
+- Shorthand syntax name: *Decorators*
+- Used cases; Web Authentication.
+\
+&nbsp;
+- In [decorator_intro.py](decorator_intro.py) *longhand syntax for wrapping a callable* demos how to manually wrap a function.
+- `any_callable_function('a', 'b', 'c')` outputs the: `any_callable_function: with arguments: arg_a='a' arg_b='b' arg_c='c'`
+\
+&nbsp;
+- Manual wrapping requires calling the `make_wrapper` function and passing the `any_callable_function` object.
+- `wrapped_callable('a', 'b', 'c')` outputs the: `any_callable_function: with arguments: arg_a='A' arg_b='bbbbbbbbbb' arg_c='c'`
+\
+&nbsp;
+- *wrapper with additional args* demos how the `make_wrapper_func_args` function accepts a callable to wrap and a keyword argument. The action argument is provided when the wrapper is created and accessible from the returned wrapper function. The `wrapped_callable` name will use *title* as the action.
+- `wrapped_callable('a', 'b', 'c')` outputs the: `any_callable_function: with arguments: arg_a='A' arg_b='BBBBBBBBBB' arg_c='c'`
+\
+&nbsp;
+- Wrappers with arguments are similar to [partial functions](https://docs.python.org/3/library/functools.html#functools.partial) where one or more arguments are pre-set. Which are useful for a wide range of use cases.
+
