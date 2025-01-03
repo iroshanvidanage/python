@@ -909,8 +909,28 @@ class Account:
 \
 &nbsp;
 - *wrapper with additional args* demos how the `make_wrapper_func_args` function accepts a callable to wrap and a keyword argument. The action argument is provided when the wrapper is created and accessible from the returned wrapper function. The `wrapped_callable` name will use *title* as the action.
-- `wrapped_callable('a', 'b', 'c')` outputs the: `any_callable_function: with arguments: arg_a='A' arg_b='BBBBBBBBBB' arg_c='c'`
+- `wrapped_callable('a', 'b', 'c')` outputs the: `any_callable_func_args: with arguments: arg_a='A' arg_b='BBBBBBBBBB' arg_c='c'`
 \
 &nbsp;
 - Wrappers with arguments are similar to [partial functions](https://docs.python.org/3/library/functools.html#functools.partial) where one or more arguments are pre-set. Which are useful for a wide range of use cases.
+
+
+### Using the shorthand syntax: @decorator
+
+- Decorators are a shorthand syntax for creating wrappers. Decorators are placed above a callable definition with a preceeding @ symbol. Following the @ symbol the decorator callable is called using the callable syntax (name).
+- In [decorators.py](decorators.py) *using the shorthand syntax* demos how the decorator is called and returned instead of the original callable.
+- `any_callable_function('a', 'b', 'c')` outputs the: `any_callable_function: with arguments: arg_a='A' arg_b='bbbbbbbbbb' arg_c='c'`
+\
+&nbsp;
+- The decorator syntax consists of placing a name binding after an @ symbol. The example above doesn't directly call the decorator. Which is why the decorator is without parenthesis. Looks `@im_a_decorator` instead of `@im_a_decorator()`
+- Simple decorator functions accept a function as an argument. More complex functions may have additional layers of wrapping. There are different reasons why additional wrapper layers might be added.
+
+> [!NOTE]
+> A general rule to determine if a decorator needs to be called is as follows: 
+> Functions accepting a wrapped function directly do not need to be called. All others will need to be called according to their function signature with the arguments.
+
+- Decorators require an additional function in order to allow arguments. The outermost function defines the required arguments and returns the next function. The remaining functions make the wrapper callable.
+- `some_callable_function('a', 'b', 'c')` outputs the: `some_callable_function: with arguments: arg_a='X' arg_b='YYYYYYYYYY' arg_c='z'`
+\
+&nbsp;
 
