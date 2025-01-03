@@ -27,11 +27,11 @@ print()
 # wrapper with additional args
 
 def any_callable_func_args(arg_a, arg_b, arg_c=':)'):
-    print(f'[blue]any_callable_function[/blue]: with arguments: {arg_a=} {arg_b=} {arg_c=}')
+    print(f'[blue]any_callable_func_args[/blue]: with arguments: {arg_a=} {arg_b=} {arg_c=}')
 
 def make_wrapper_func_args(function, action=None):
     def wrapper(arg_a, arg_b, arg_c=None):
-        print(f'[blue]any_callable_function[/blue]: with arguments: {arg_a=} {arg_b=} {arg_c=}')
+        print(f'[blue]any_callable_func_args[/blue]: with arguments: {arg_a=} {arg_b=} {arg_c=}')
         print()
         if action in 'upper lower title'.split():
             arg_a = getattr(arg_a, action)()
