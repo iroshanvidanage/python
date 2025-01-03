@@ -934,3 +934,16 @@ class Account:
 \
 &nbsp;
 
+- Decorators make it easier to effectively manage wrappers by defining them alongside the callable definition.
+- The wrappers in the above examples match the argument signature of the wrapped callable. However, decorators are often applied to callables with unknown signatures.
+- For this need to use packing/unpacking syntax to represent multiple positional and keyword arguments with individual arguments.
+
+> [!TIP]
+> The wrapper defines two arguments: `args` and `kwargs`. The single asterik in front of args instructs the interpreter to pack all positional arguments into args as a tuple.
+> the double asterisk packs all keyword arguments into kwargs as a dictionary.
+
+> [!NOTE]
+> The names `args` and `kwargs` are common though, irrelevant to the packing/unpacking process.
+
+- Creating generic decorators allows them to be reused across callables with different signatures.
+
