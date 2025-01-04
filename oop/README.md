@@ -947,3 +947,23 @@ class Account:
 
 - Creating generic decorators allows them to be reused across callables with different signatures.
 
+
+### Chain of wrappers
+
+- Decorators can be stacked to create a chain of wrappers. Decorators are evaluated by the inerpreter from bottom to top.
+- In [decorators.py](decorators.py) *chain of wrappers* demonstrate how the decorator stacks works.
+- In [decorators.py](decorators.py) *stacking is evaluted from bottom to top* demonstrate how the stacking is evaluted
+- `print(b_callable('THIS IS THE WAY'))` outputs the: `This Is The Way lower string`
+- `print(c_callable('THIS IS THE WAY'))` outputs the: `This Is The Way Lower String`
+
+
+### Decorator interference
+
+- Decorators can interfere with the metaprogramming of third-party libraries. Libraries such as flask rely on the names of callables. Wrapping a callable replaces the original callable with the wrapper including the name.
+- In [decorators.py](decorators.py) *decorator interference*:
+    - `print(something_sortb_slow.__name__)` outputs the: `something_sortb_slow`
+    - `print(something_sorta_slow.__name__)` outputs the: `wrapper`
+- In the second instance it displays the wrapper function name since the original function has been replaced by the wrapper function.
+- This can cause errors in third-party libraries.
+- `functools.wrap` in the Python's standard library can be used to rename the wrapper with the original name.
+    - `print(something_sortc_slow.__name__)` outputs the: `something_sortc_slow`
