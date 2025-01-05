@@ -967,3 +967,35 @@ class Account:
 - This can cause errors in third-party libraries.
 - `functools.wrap` in the Python's standard library can be used to rename the wrapper with the original name.
     - `print(something_sortc_slow.__name__)` outputs the: `something_sortc_slow`
+
+
+## Challenge MessageClient
+
+- Convert the MessageClient class into a context manager
+- Following code must be run when entering the context.
+```py
+self.connection = socket.create_connection((self.host, self.port), timeout=5.0)
+return self
+```
+
+- Following code muste be run when exiting the context.
+```py
+self.connection.close()
+```
+
+- Implement the redact decorator and apply it to the `send_message` method of the `MessageClient` class.
+- Messages(type: bytes) starting with: 'TOP SECRET: ' must have all remaining characters replaced with an asterisk (*).
+- Example:
+```py
+original = b'TOP SECRET: Aliens are invading!'
+redacted = b'TOP SECRET: ********************'
+```
+- Messages that are not TOP SECRET must remain unchanged.
+- Example
+```py
+original = b'Hey!'
+redacted = b'Hey!'
+```
+- Messages must be redacted before being passed as an argument to the `send_message` method.
+- Implement the `unredacted` method of the `MessageServer` class.
+- Pass a lambda function to the `search` method and return all messages that are not redacted.
