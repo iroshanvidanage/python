@@ -97,18 +97,19 @@ def redact(function):
     '''
     @wraps(function)
     def wrapper(*args, **kwargs):
-        if len(args) != 1:
+        args = list(args)
+        if len(args) != 2:
             return function(*args, **kwargs)
 
-        string_data = args[0].decode('utf-8')
+        string_data = args[1].decode('utf-8')
 
         if 'TOP SECRET: ' not in string_data:
             return function(*args, **kwargs)
         
         string_data = string_data.split('TOP SECRET: ')
         string_data[1] = '*' * len(string_data[1])
-        args[0] = 'TOP SECRET: '.join(string_data).encode('utf-8')
-
+        args[1] = 'TOP SECRET: '.join(string_data).encode('utf-8')
+        args = tuple(args)
         return function(*args, **kwargs)
     return wrapper
 
