@@ -30,9 +30,13 @@ redacted = b'Hey!'
 - Pass a lambda function to the `search` method and return all messages that are not redacted.
 '''
 
-## script starts here
 
-import socket, threading
+#########################################################################################
+## script starts here
+#########################################################################################
+
+import socket, threading, time
+from functools import wraps
 
 class MessageServer:
 
@@ -87,10 +91,26 @@ class MessageServer:
         '''
 
 
-def redact():
+def redact(function):
     ''' A decorator used to redact messages sent via the send_message method of the MessageClient.
         Messages are expected to be bytes objects. NOT str objects.
     '''
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        if len(args) != 1:
+            return function(*args, **kwargs)
+
+        string_data = args[0].decode('utf-8')
+
+        if 'TOP SECRET: ' not in string_data:
+            return function(*args, **kwargs)
+        
+        string_data = string_data.split('TOP SECRET: ')
+        string_data[1] = '*' * len(string_data[1])
+        args[0] = 'TOP SECRET: '.join(string_data).encode('utf-8')
+
+        return function(*args, **kwargs)
+    return wrapper
 
 
 class MessageClient:
@@ -120,14 +140,36 @@ class MessageClient:
         self.connection = None
         self.host = host
         self.port = port
+
+    def __enter__(self) -> 'MessageClient':
+        self.connection = socket.create_connection((self.host, self.port), timeout=5.0)
+        return self
     
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+        self.connection.close()
+    
+    @redact
     def send_message(self, message: bytes) -> bytes:
         self.connection.sendall(message)
         return self.connection.recv(1024)
 
 
 def test_example() -> None:
-    ...
+    port = 5000
+    server = MessageServer(port=port)
+    server.serve_forever()
+    time.sleep(1.0)
+
+    with MessageClient(port=port) as client:
+        messages = [
+            b'TOP SECRET: Aliens are invading!.',
+            b'Hey!',
+            b'Sup.',
+            b'TOP SECRET: The universe is going to collapse.'
+        ]
+        for message in messages:
+            print(client.send_message(message))
+
 
 
 if __name__ == '__main__':
