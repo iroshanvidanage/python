@@ -89,6 +89,7 @@ class MessageServer:
             >>> server.unredacted()
             [b'HEY!', b'Sup.']
         '''
+        return self.search(lambda x: 'TOP SECRET: ' not in x.decode('utf-8'))
 
 
 def redact(function):
