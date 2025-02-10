@@ -999,3 +999,48 @@ redacted = b'Hey!'
 - Messages must be redacted before being passed as an argument to the `send_message` method.
 - Implement the `unredacted` method of the `MessageServer` class.
 - Pass a lambda function to the `search` method and return all messages that are not redacted.
+
+\
+&nbsp;
+\
+&nbsp;
+
+
+## Python Dependency Managemnt with Pip
+
+### PIP and Python Package Index (PyPI)
+
+- Python package index is a repository of python code.
+- Manages 1000s of modules created by python devs around the world.
+- In context of Package index: package refers to a distribution package.
+- [Pypi.org](https://www.pypi.org) is the package page & pip is the tool used to install (package installer for python).
+- The repo consist of,
+    - Text-based templates
+    - NLP libraries
+    - Web Application Servers
+    - Video Game Engines
+
+> [!NOTE]
+> This code/module is considered as *untrusted code*.
+> Such code should be reviewed carefully before applying to your application.
+
+
+### Package Versions
+
+- Python runtime includes a dir `python/lib/python<version>/site-packages` which is used to store/install the third-party modules/packages.
+- External code changes can affect your code in significant ways due to package versions.
+- multiple apps can require different versions of the same package which could lead to version conflicts.
+- Pip provides a mechanism for installing specific versions of a package.
+- Virtual environments (venv) module provides a support for creating light weight venvs with their own site-directories isolated from the system site-directory.
+
+
+### Package Selection
+
+- There are few considerations to be done before selecting a package from the package repo.
+    1. Licensing - Does the package's license allow you to use the code as needed?
+    2. Documentations - Does the package contain useful documentation?
+    3. Effort Savings - Does the introduction of this package save enough effort to justify using it?
+    4. Quality - Does the package contain test that validate the code? Is the code close enough to be considered idiomatic?
+    5. Security - Does the package take reasonable considerations to maintain security?
+- These are just few topics to consider and there can be other topics to consider. More the better.
+
