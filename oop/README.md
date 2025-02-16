@@ -132,6 +132,8 @@ source <path_to_name>/bin/activate
 | ~= | Compatible version operator | Used as a shorthand syntax that compresses multiple version specifiers |
 | === | Arbitrary Matching operator | Used to match exact strings; Also provides a mechanism for matching the text of the version for packages that don't follow the expected version structure |
 
+- Example: `python3 -m pip install "rich==12.4.*, < 12.4.4"`
+
 
 ### Manage Package Versions
 
@@ -149,6 +151,46 @@ source <path_to_name>/bin/activate
 - `source <path_to_dir>/bin/activate` is used to initialize the env. `deactivate` is used to deactivate the current active virtual environment.
 - This is activated only in the current active terminal and for multiple terminals we can have different vir_envs activated.
 - This env is created with the current available python runtime hence it's similar to the current available python version and it's better to create new vir_envs for new python versions.
+
+
+### Name-based and URL-based
+
+- There are two ways to install packages,
+    - Name-based: can be installed by refering to the python package name if it's available in the pypi repo.
+    - URL-based: can be installed by specifying the exact git url of the package from the source code.
+    - `python3 -m pip install "rich @ git+https://github.com/Textualize/rich.git"`
+
+> [!NOTE]
+> The package name and URL are seperated by an `@` symbol.
+
+
+### Environment Markers
+
+- Environment markers are used to determine is a dependency is required for the given runtime env.
+
+| Marker | Code Equivalent |
+| ---- | ---- |
+| os_name | os.name |
+| sys_platform | sys.platform |
+| platform_machine | platform.machine() |
+| platform_python_implementation | platform.python_implementation() |
+| platform_release | platform.release() |
+| platform_system | platform.system() |
+| platform_version | platform.version() |
+| python_version | `'.'.join(platform.python_version_tuple()[:2])` |
+| python_full_version | platform.python_version() |
+| implementation_name | sys.implementation.name |
+
+- Example: `python3 -m pip install "rich, python_version>'3.8' and sys_platform=='linux'"`
+
+> [!NOTE]
+> The **darwin** platform represents macOS.
+> `python3 -m pip install "rich, python_version>'3.8' and sys_platform=='darwin'"`
+
+- Install an extra dependency of rich.
+    - `python3 -m pip install rich[jupyter]`
+
+- Example: `python3 -m pip install "rich[jupyter] @ git+https://github.com/Textualize/rich.git@v12.3.0; python_version>'3.8' and sys_platform=='linux'"`
 
 
 ### Create a package
