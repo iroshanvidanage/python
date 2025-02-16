@@ -1058,3 +1058,8 @@ redacted = b'Hey!'
 | SYMBOL | OPERATOR NAME | DESCRIPTION |
 | --- | ---- | ---- |
 | == | Matching operator | For an exact match |
+| != | Exclusion operator | To exclude a version |
+| <> | Exclusive order operator | To include versions of greater or lesser versions |
+| <= >= | Inclusive order operator | To include versions of greater or equal or lesser or equal value |
+| ~= | Compatible version operator | Used as a shorthand syntax that compresses multiple version specifiers |
+| === | Arbitrary Matching operator | Used to match exact strings; Also provides a mechanism for matching the text of the version for packages that don't follow the expected version structure |
