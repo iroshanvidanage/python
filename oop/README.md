@@ -74,6 +74,83 @@ source <path_to_name>/bin/activate
     - A build back-end
 
 
+## Python Dependency Managemnt with Pip
+
+### PIP and Python Package Index (PyPI)
+
+- Python package index is a repository of python code.
+- Manages 1000s of modules created by python devs around the world.
+- In context of Package index: package refers to a distribution package.
+- [Pypi.org](https://www.pypi.org) is the package page & pip is the tool used to install (package installer for python).
+- The repo consist of,
+    - Text-based templates
+    - NLP libraries
+    - Web Application Servers
+    - Video Game Engines
+
+> [!NOTE]
+> This code/module is considered as *untrusted code*.
+> Such code should be reviewed carefully before applying to your application.
+
+
+### Package Versions
+
+- Python runtime includes a dir `python/lib/python<version>/site-packages` which is used to store/install the third-party modules/packages.
+- External code changes can affect your code in significant ways due to package versions.
+- multiple apps can require different versions of the same package which could lead to version conflicts.
+- Pip provides a mechanism for installing specific versions of a package.
+- Virtual environments (venv) module provides a support for creating light weight venvs with their own site-directories isolated from the system site-directory.
+
+
+### Package Selection
+
+- There are few considerations to be done before selecting a package from the package repo.
+    1. Licensing - Does the package's license allow you to use the code as needed?
+    2. Documentations - Does the package contain useful documentation?
+    3. Effort Savings - Does the introduction of this package save enough effort to justify using it?
+    4. Quality - Does the package contain test that validate the code? Is the code close enough to be considered idiomatic?
+    5. Security - Does the package take reasonable considerations to maintain security?
+- These are just few topics to consider and there can be other topics to consider. More the better.
+
+
+### Package Install
+
+- Package Installer for Python (pip) is the tool for installing packages for python.
+- `python3 -m pip` gives the available commands with pip.
+    - `list` gives the installed packages and other dependecies with version.
+    - `install <package>` will locate, download and install a package.
+    - `install <package>==<version>` to install a specific version of a package.
+    - `uninstall <package>` will uninstall the package.
+    - `-y` will auto configure the Yes for the prompt.
+
+| SYMBOL | OPERATOR NAME | DESCRIPTION |
+| --- | ---- | ---- |
+| == | Matching operator | For an exact match |
+| != | Exclusion operator | To exclude a version |
+| <> | Exclusive order operator | To include versions of greater or lesser versions |
+| <= >= | Inclusive order operator | To include versions of greater or equal or lesser or equal value |
+| ~= | Compatible version operator | Used as a shorthand syntax that compresses multiple version specifiers |
+| === | Arbitrary Matching operator | Used to match exact strings; Also provides a mechanism for matching the text of the version for packages that don't follow the expected version structure |
+
+
+### Manage Package Versions
+
+- Community standard is to maintain the required packages for an application in an text file named `requirements.txt`
+- A typical [requirements.txt](requirements.txt) file.
+- `python3 -m pip install -r requirements.txt` will install the packages and the exact versions specified in the text file.
+- `pip freeze` is a way to list the current installed package version specifiers. Can be used to create a backup if we are trying to upgrade any packages and dependencies.
+- After testing with any latest version upgrades and need to revert back to the previous versions we can run the command to install the packages from the requirements file, it will remove the latest versions and install the required versions.
+
+
+### Manage Packages for Multiple Projects (venv)
+
+- `venv` module is used to create isolated python environments, named virtual environment.
+- `python3 -m venv <path_to_dir>` is used to create the env.
+- `source <path_to_dir>/bin/activate` is used to initialize the env. `deactivate` is used to deactivate the current active virtual environment.
+- This is activated only in the current active terminal and for multiple terminals we can have different vir_envs activated.
+- This env is created with the current available python runtime hence it's similar to the current available python version and it's better to create new vir_envs for new python versions.
+
+
 ### Create a package
 
 - Create a folder with the desired name. Example, Cards.
@@ -1030,80 +1107,4 @@ redacted = b'Hey!'
 \
 &nbsp;
 
-
-## Python Dependency Managemnt with Pip
-
-### PIP and Python Package Index (PyPI)
-
-- Python package index is a repository of python code.
-- Manages 1000s of modules created by python devs around the world.
-- In context of Package index: package refers to a distribution package.
-- [Pypi.org](https://www.pypi.org) is the package page & pip is the tool used to install (package installer for python).
-- The repo consist of,
-    - Text-based templates
-    - NLP libraries
-    - Web Application Servers
-    - Video Game Engines
-
-> [!NOTE]
-> This code/module is considered as *untrusted code*.
-> Such code should be reviewed carefully before applying to your application.
-
-
-### Package Versions
-
-- Python runtime includes a dir `python/lib/python<version>/site-packages` which is used to store/install the third-party modules/packages.
-- External code changes can affect your code in significant ways due to package versions.
-- multiple apps can require different versions of the same package which could lead to version conflicts.
-- Pip provides a mechanism for installing specific versions of a package.
-- Virtual environments (venv) module provides a support for creating light weight venvs with their own site-directories isolated from the system site-directory.
-
-
-### Package Selection
-
-- There are few considerations to be done before selecting a package from the package repo.
-    1. Licensing - Does the package's license allow you to use the code as needed?
-    2. Documentations - Does the package contain useful documentation?
-    3. Effort Savings - Does the introduction of this package save enough effort to justify using it?
-    4. Quality - Does the package contain test that validate the code? Is the code close enough to be considered idiomatic?
-    5. Security - Does the package take reasonable considerations to maintain security?
-- These are just few topics to consider and there can be other topics to consider. More the better.
-
-
-### Package Install
-
-- Package Installer for Python (pip) is the tool for installing packages for python.
-- `python3 -m pip` gives the available commands with pip.
-    - `list` gives the installed packages and other dependecies with version.
-    - `install <package>` will locate, download and install a package.
-    - `install <package>==<version>` to install a specific version of a package.
-    - `uninstall <package>` will uninstall the package.
-    - `-y` will auto configure the Yes for the prompt.
-
-| SYMBOL | OPERATOR NAME | DESCRIPTION |
-| --- | ---- | ---- |
-| == | Matching operator | For an exact match |
-| != | Exclusion operator | To exclude a version |
-| <> | Exclusive order operator | To include versions of greater or lesser versions |
-| <= >= | Inclusive order operator | To include versions of greater or equal or lesser or equal value |
-| ~= | Compatible version operator | Used as a shorthand syntax that compresses multiple version specifiers |
-| === | Arbitrary Matching operator | Used to match exact strings; Also provides a mechanism for matching the text of the version for packages that don't follow the expected version structure |
-
-
-### Manage Package Versions
-
-- Community standard is to maintain the required packages for an application in an text file named `requirements.txt`
-- A typical [requirements.txt](requirements.txt) file.
-- `python3 -m pip install -r requirements.txt` will install the packages and the exact versions specified in the text file.
-- `pip freeze` is a way to list the current installed package version specifiers. Can be used to create a backup if we are trying to upgrade any packages and dependencies.
-- After testing with any latest version upgrades and need to revert back to the previous versions we can run the command to install the packages from the requirements file, it will remove the latest versions and install the required versions.
-
-
-### Manage Packages for Multiple Projects (venv)
-
-- `venv` module is used to create isolated python environments, named virtual environment.
-- `python3 -m venv <path_to_dir>` is used to create the env.
-- `source <path_to_dir>/bin/activate` is used to initialize the env. `deactivate` is used to deactivate the current active virtual environment.
-- This is activated only in the current active terminal and for multiple terminals we can have different vir_envs activated.
-- This env is created with the current available python runtime hence it's similar to the current available python version and it's better to create new vir_envs for new python versions.
 
