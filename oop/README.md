@@ -153,6 +153,8 @@ python3 -m pip install -U pip
 - `python3 -m pip install -r requirements.txt` will install the packages and the exact versions specified in the text file.
 - `pip freeze` is a way to list the current installed package version specifiers. Can be used to create a backup if we are trying to upgrade any packages and dependencies.
 - After testing with any latest version upgrades and need to revert back to the previous versions we can run the command to install the packages from the requirements file, it will remove the latest versions and install the required versions.
+- If there are multiple requirements files and depending on the application type can categorize the requirements. If a requirement file need to install dependencies from another can add a command line argument to be passed to pip install.
+- Add the following line in the prod_requirement.txt if need to install dependencies from the dev file `-r dev_requirement.txt`
 
 
 ### Manage Packages for Multiple Projects (venv)
