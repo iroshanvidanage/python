@@ -1063,3 +1063,13 @@ redacted = b'Hey!'
 | <= >= | Inclusive order operator | To include versions of greater or equal or lesser or equal value |
 | ~= | Compatible version operator | Used as a shorthand syntax that compresses multiple version specifiers |
 | === | Arbitrary Matching operator | Used to match exact strings; Also provides a mechanism for matching the text of the version for packages that don't follow the expected version structure |
+
+
+### Manage Package Versions
+
+- Community standard is to maintain the required packages for an application in an text file named `requirements.txt`
+- A typical [requirements.txt](requirements.txt) file.
+- `python3 -m pip install -r requirements.txt` will install the packages and the exact versions specified in the text file.
+- `pip freeze` is a way to list the current installed package version specifiers. Can be used to create a backup if we are trying to upgrade any packages and dependencies.
+- After testing with any latest version upgrades and need to revert back to the previous versions we can run the command to install the packages from the requirements file, it will remove the latest versions and install the required versions.
+
