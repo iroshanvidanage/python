@@ -1073,3 +1073,12 @@ redacted = b'Hey!'
 - `pip freeze` is a way to list the current installed package version specifiers. Can be used to create a backup if we are trying to upgrade any packages and dependencies.
 - After testing with any latest version upgrades and need to revert back to the previous versions we can run the command to install the packages from the requirements file, it will remove the latest versions and install the required versions.
 
+
+### Manage Packages for Multiple Projects (venv)
+
+- `venv` module is used to create isolated python environments, named virtual environment.
+- `python3 -m venv <path_to_dir>` is used to create the env.
+- `source <path_to_dir>/bin/activate` is used to initialize the env. `deactivate` is used to deactivate the current active virtual environment.
+- This is activated only in the current active terminal and for multiple terminals we can have different vir_envs activated.
+- This env is created with the current available python runtime hence it's similar to the current available python version and it's better to create new vir_envs for new python versions.
+
