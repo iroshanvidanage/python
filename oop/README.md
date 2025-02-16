@@ -8,6 +8,16 @@ python3 -m venv <path_to_name>
 deactivate
 # activate the virtual env
 source <path_to_name>/bin/activate
+python3 -m pip install --upgrade pip
+```
+
+```shell
+# remove all third-party modules from the v_env by re-creating it
+deactivate
+python3 -m venv <path_to_name> --prompt="display_name" --clear
+# activate the virtual env
+source <path_to_name>/bin/activate
+python3 -m pip install -U pip
 ```
 
 ### Install packages in v_env
