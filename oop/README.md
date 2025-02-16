@@ -26,12 +26,6 @@ source <path_to_name>/bin/activate
 
 - A collection of relatable modules.
 
-### Create a package
-
-- Create a folder with the desired name. Example, Cards.
-- Create a python file `__init__.py` and enter the code inside this file.
-- The package name is the folder name.
-
 
 ### Regular package vs Namespace package
 
@@ -78,6 +72,37 @@ source <path_to_name>/bin/activate
     - [pyproject.toml file](./packaging/pyproject.toml)
     - A build front-end
     - A build back-end
+
+
+### Create a package
+
+- Create a folder with the desired name. Example, Cards.
+- Create a python file `__init__.py` and enter the code inside this file.
+- The package name is the folder name.
+- Packaging [guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
+
+```shell
+# upgrade the pip
+python3 -m pip install --upgrade pip
+# go to the directory and create the pyproject.toml
+# configure metdata
+touch pyproject.toml
+# create README.md
+touch README.md
+# include other files for distibution
+
+# generate distribution archives
+python3 -m build
+```
+
+> - dist/
+>   - ├── example_package_YOUR_USERNAME_HERE-0.0.1-py3-none-any.whl
+>   - └── example_package_YOUR_USERNAME_HERE-0.0.1.tar.gz
+
+- The `tar.gz` file is a *source distribution* whereas the `.whl` file is a *built distribution*.
+- Newer pip versions preferentially install built distributions, but will fall back to source distributions if needed.
+- You should always upload a source distribution and provide built distributions for the platforms your project is compatible with.
+
 
 ## Modules
 
