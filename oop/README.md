@@ -237,6 +237,14 @@ python3 -m build
 - You should always upload a source distribution and provide built distributions for the platforms your project is compatible with.
 
 
+## Point of Interest - Poetry
+
+- Dependency management can become a challenge. Especially regarding the creation and distribution of packages. Pip makes it easy to download and install dependent modules. However, the Python ecosystem doesn't make creating and distributing packages as simple as it could.
+- The open source [**Poetry**](https://python-poetry.org) module attempts to simplify this process. [Poetry](https://github.com/python-poetry/poetry) replaces much of the boiler plate code and configuration around packaging with a single *pyproject.toml* file.
+
+- Example: [pyproject.toml](./packaging/poetry_pyproject.toml)
+
+
 ## Modules
 
 - Standard modules in python; sys, os, math, collections, random, 
