@@ -122,6 +122,7 @@ source <path_to_name>/bin/activate
     - `install <package>==<version>` to install a specific version of a package.
     - `uninstall <package>` will uninstall the package.
     - `-y` will auto configure the Yes for the prompt.
+    - guide for [pip](https://pip.pypa.io/en/stable/cli/pip_install/)
 
 | SYMBOL | OPERATOR NAME | DESCRIPTION |
 | --- | ---- | ---- |
@@ -159,6 +160,7 @@ source <path_to_name>/bin/activate
     - Name-based: can be installed by refering to the python package name if it's available in the pypi repo.
     - URL-based: can be installed by specifying the exact git url of the package from the source code.
     - `python3 -m pip install "rich @ git+https://github.com/Textualize/rich.git"`
+    - Better to use `python3 -m pip install git+https://github.com/Textualize/rich.git@main`
 
 > [!NOTE]
 > The package name and URL are seperated by an `@` symbol.
@@ -190,7 +192,7 @@ source <path_to_name>/bin/activate
 - Install an extra dependency of rich.
     - `python3 -m pip install rich[jupyter]`
 
-- Example: `python3 -m pip install "rich[jupyter] @ git+https://github.com/Textualize/rich.git@v12.3.0; python_version>'3.8' and sys_platform=='linux'"`
+- Example: `python3 -m pip install "rich[jupyter] @ git+https://github.com/Textualize/rich.git@v12.3.0 ; python_version>'3.8' and sys_platform=='linux'"`
 
 
 ### Create a package
