@@ -45,6 +45,20 @@ def good_bad_sorted(sequence):
             >>> good_bad_sorted(squence)
             ([42, 4, 2], ['MISSING'])
     '''
+    good = []
+    bad = []
+
+    for _ in sequence:
+        if _.isnumeric():
+            if int(_) % 2 == 0:
+                good.append(int(_))
+        else:
+            bad.append(_)
+    
+    good.sort(reverse=True)
+    bad.sort()
+
+    return (good, bad)
 
 
 if __name__ == '__main__':
