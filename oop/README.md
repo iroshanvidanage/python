@@ -1044,3 +1044,17 @@ redacted = b'Hey!'
     5. Security - Does the package take reasonable considerations to maintain security?
 - These are just few topics to consider and there can be other topics to consider. More the better.
 
+
+### Package Install
+
+- Package Installer for Python (pip) is the tool for installing packages for python.
+- `python3 -m pip` gives the available commands with pip.
+    - `list` gives the installed packages and other dependecies with version.
+    - `install <package>` will locate, download and install a package.
+    - `install <package>==<version>` to install a specific version of a package.
+    - `uninstall <package>` will uninstall the package.
+    - `-y` will auto configure the Yes for the prompt.
+
+| SYMBOL | OPERATOR NAME | DESCRIPTION |
+| --- | ---- | ---- |
+| == | Matching operator | For an exact match |
