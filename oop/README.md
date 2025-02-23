@@ -1198,3 +1198,36 @@ redacted = b'Hey!'
 - A basic unittest [example](./tests/test_assertion.py). # class TestExample
 - Test cases represent concepts which can be tested as a single entity, sa objects, functions, and methods. Test methods can contain zero or more assertions. A test passes when all assertions inside the test method are successful.
 
+
+### Test Runner
+
+- The unittest module includes a mechanism for running tests called a test runner. The test runner is used to run or more tests test cases.
+- In the example we called the tests from `unittest.main()` callable. By default it runs the tests from test casses defined in the current code file.
+- The callable can be configured by providing keyword arguments to the callable, by specifying command line arguments, or both.
+
+
+##### Using with CLI Flags
+
+- Configurations can be specified as for the [guide](https://docs.python.org/3/library/unittest.html#command-line-options).
+- `python3 test_assertion.py -v -f`
+
+
+##### Using with Keyword Arguments
+
+- Configurations can be specified as for the [guide](https://docs.python.org/3/library/unittest.html#unittest.main).
+- `unittest.main(verbosity=2, failtest=True)`
+
+
+#### Test Runner: CLI
+
+- The test runner can be started by invoking the unittest module as a command line application. Including options to run one or more test modules, test cases, or test methods.
+- `python3 -m tests.test_assertion.TestExample.test_is_number -v -f`
+- `python3 -m tests.test_assertion -v -f`
+
+
+#### Test Runner: Discovery
+
+- The unittest module includes a [test-discovery](https://docs.python.org/3/library/unittest.html#test-discovery) mechanism based on file name patterns. Allowing multiple test caces inside a module to be run together.
+- A real-world example of test [suite](https://github.com/python/cpython/blob/main/Lib/unittest/main.py).
+- The location of `python3<ver>/unittest/test` is OS and install specific. `ls -lash /usr/local/lib/python3<ver>/unittest/test`
+- `python3 -m unittest discover /usr/local/lib/python3<ver>/unittest/test "test*.py"` This command will search the dir for all files as specified.
