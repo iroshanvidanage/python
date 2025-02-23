@@ -1172,3 +1172,29 @@ redacted = b'Hey!'
 &nbsp;
 
 
+## Unittest
+
+
+### Introduction
+
+- The unittest module is Python's built-in testing [module](https://docs.python.org/3/library/unittest.html#module-unittest). Used to create and run unit and integration tests.
+- All software contains developer made assumptions. Areas of code where assumptions are made:
+    - Callable parameters and return types.
+    - Object types.
+    - Nullability
+    - Idempotency.
+    - Data structures.
+- Erroneous assumptions can result in software defects of varying degrees of severity. Unittest enables developers to test the assumptions.
+- It's designed around the notion of performing an action and making an assertion regarding the results.
+- Actions are events which produce or change: objects and or external resources; resources including files, dbs etc, actions including operations, and callables.
+- Actions are taken and assertions are made about the stats of the results. Assertions raise an exception when results don't match what's expected. Indicating that a codified assumption is no longer accurate.
+
+| Action | Expected Result | Assertion |
+| ----- | ----- | ----- |
+| `int('10')` | 10 | `int('10')` equals 10 |
+| `str(3.14)` | '3.14' | `str(3.14)` equals '3.14' |
+| `int('no')` | ValueError | `int('no')` raises a ValueError |
+
+- A basic unittest [example](./tests/test_assertion.py). # class TestExample
+- Test cases represent concepts which can be tested as a single entity, sa objects, functions, and methods. Test methods can contain zero or more assertions. A test passes when all assertions inside the test method are successful.
+
