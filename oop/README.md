@@ -1273,5 +1273,5 @@ redacted = b'Hey!'
     - assertNone
     - assertEqual
 - Tests use one or more of these assertion methods to test assumptions.
-
+- [`test_assertion_methods.py`](./tests/test_assertion_methods.py)
 
