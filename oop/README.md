@@ -1288,3 +1288,10 @@ redacted = b'Hey!'
 - Test methods can be conditionally skipped using decorator functions or TestCase methods. This is useful in scenarios where tests aren't required for a given OS, Python versions, etc.
 - [`test_conditions.py`](./tests/test_conditions.py)
 
+
+### Test Failures
+
+- Incorrect assertions results in failinf test methods.
+- Failed tests display the traceback in the console.
+- [`test_failures.py`](./tests/test_failures.py)
+
