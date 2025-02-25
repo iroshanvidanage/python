@@ -1282,3 +1282,9 @@ redacted = b'Hey!'
 - This is commonly used to set up connections to external services such as databases.
 - [`test_setup_teardown.py`](./tests/test_setup_teardown.py)
 
+
+#### Test Cases: Skip Tests (Conditional Tests)
+
+- Test methods can be conditionally skipped using decorator functions or TestCase methods. This is useful in scenarios where tests aren't required for a given OS, Python versions, etc.
+- [`test_conditions.py`](./tests/test_conditions.py)
+
