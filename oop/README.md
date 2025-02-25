@@ -1275,3 +1275,10 @@ redacted = b'Hey!'
 - Tests use one or more of these assertion methods to test assumptions.
 - [`test_assertion_methods.py`](./tests/test_assertion_methods.py)
 
+
+#### Test Cases: Setup/Teardown
+
+- Test cases may consist of many test methods. to reduce repeated code the TestCase base class includes setup and teardown methods. These methods are run before each test, allowing tests to use shared resources.
+- This is commonly used to set up connections to external services such as databases.
+- [`test_setup_teardown.py`](./tests/test_setup_teardown.py)
+
