@@ -1231,3 +1231,35 @@ redacted = b'Hey!'
 - A real-world example of test [suite](https://github.com/python/cpython/blob/main/Lib/unittest/main.py).
 - The location of `python3<ver>/unittest/test` is OS and install specific. `ls -lash /usr/local/lib/python3<ver>/unittest/test`
 - `python3 -m unittest discover /usr/local/lib/python3<ver>/unittest/test "test*.py"` This command will search the dir for all files as specified.
+
+
+### Test Cases
+
+- The unit test module takes an obj-oriented approach to testing; introducing a base class used as a test building block called a test case.
+- Test cases define a context for performing tests. Any concept which can be treated as a single unit can be a test case. Including: functions, class definitions, workflows, etc.
+- Examples:
+    ```py
+    class TestSpecificFunction(unittest.TestCase):
+        ''' Assumptions about a specific function are tested across one or more test methods. '''
+    class TestSpecificClassDef(unittest.TestCase):
+        ''' Assumptions about a specific class are tested across one or more test methods. '''
+    class TestIndexWebPageLoad(unittest.TestCase):
+        ''' Assumptions about a specific workflow are tested across one or more test methods. 
+            Examples:
+            - Does the index web page load?
+            - Does the index web page return a successful status code?
+            - ...
+        '''
+    ```
+
+- A class becomes a test case by inheriting from `unittest.TestCase`.
+- Class definitions for test cases often include the name *Test* at the start or end of the class name.
+- Examples:
+    ```py
+    class TestInt(unittest.TestCase): pass
+    class IntTest(unittest.TestCase): pass
+    class TestIndexWebPageLoad(unittest.TestCase): pass
+    class SiteLoginProcessTest(unittest.TestCase): pass
+    ```
+- Tests are defined by creating methods with names starting with the word *test*. This naming convention is used by the test runner to identify tests. when the test runner encounters _test*_ methods it recognizes and runs them.
+
