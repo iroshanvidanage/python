@@ -1235,7 +1235,7 @@ redacted = b'Hey!'
 
 ### Test Cases
 
-- The unit test module takes an obj-oriented approach to testing; introducing a base class used as a test building block called a test case.
+- The unittest module takes an obj-oriented approach to testing; introducing a base class used as a test building block called a test case.
 - Test cases define a context for performing tests. Any concept which can be treated as a single unit can be a test case. Including: functions, class definitions, workflows, etc.
 - Examples:
     ```py
@@ -1252,7 +1252,7 @@ redacted = b'Hey!'
         '''
     ```
 
-- A class becomes a test case by inheriting from `unittest.TestCase`.
+- A class becomes a test case by inheriting from [`unittest.TestCase`](https://docs.python.org/3/library/unittest.html#unittest.TestCase).
 - Class definitions for test cases often include the name *Test* at the start or end of the class name.
 - Examples:
     ```py
@@ -1262,4 +1262,16 @@ redacted = b'Hey!'
     class SiteLoginProcessTest(unittest.TestCase): pass
     ```
 - Tests are defined by creating methods with names starting with the word *test*. This naming convention is used by the test runner to identify tests. when the test runner encounters _test*_ methods it recognizes and runs them.
+
+
+#### Test Cases: Assertions
+
+- The unittest.TestCase base class defines methods for performing [*assertions*](https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertEqual). These methods are used to compare and inspect objects in different ways.
+- Examples:
+    - assertTrue
+    - assertFlase
+    - assertNone
+    - assertEqual
+- Tests use one or more of these assertion methods to test assumptions.
+
 
