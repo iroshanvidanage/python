@@ -1174,6 +1174,10 @@ redacted = b'Hey!'
 
 ## Unittest
 
+- Tests are created inside test cases. Test cases are created by subclassing the `unittest.TestCase` class. TestCase include methods for performing setup and teardown, making assertions, among others.
+- The `unittest` module was based on a popular Java testing framework called jUnit. Unittest ignores many of Python's idioms in favor of mirroring junit, which followed Java's idioms. there are third-party Pythonic testing libraries such as [*Pytest*](https://docs.pytest.org/en/stable/).
+- Pytest uses Python's assert keyword to make assertions rather than specific assertion methods. It also locates tests based on naming conventions which removes the need to subclass `unittest.TestCase`.
+
 
 ### Introduction
 
