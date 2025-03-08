@@ -1358,3 +1358,11 @@ print('No assertion errors')
 - They accept any number of arguments and can return a value when called.
 - Playground [snippet](playground_mock_callables.py).
 
+
+### Call Assertions
+
+- Mocks record calls and provide different mechanisms for inspection how calls were made.
+- Mock objs include methods used to make assertions about calls.
+- Assertion methods raise an `AssertionError` for False assertions.
+- Some common assertion methods in this [snippet](playground_mockcallable_assertions.py).
+
