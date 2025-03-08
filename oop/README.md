@@ -1299,3 +1299,55 @@ redacted = b'Hey!'
 - Failed tests display the traceback in the console.
 - [`test_failures.py`](./tests/test_failures.py)
 
+
+## Mocking
+
+
+### Introduction to Mock
+
+- The unittest.mock module is Python's mocking and patching module.
+- Used to replace objects with fake implementations during testing.
+- Mock objects or mocks can replace objects with fake implementations and make asertions about how mock objects are used.
+- Commonly used to replace objects and external resources such as files, dbs and web APIs.
+- Replacing functionality with mock implementations allows code to be tested independently of it's dependencies.
+- Key features of Mocks.
+    - Mocks are callable.
+        - Non-callable varients exists:
+            - NonCallableMock
+            - NonCallableMagicMock
+    - Mocks create attributes and methods when first accessed.
+    - Record all calls along with arguments.
+    - Include assertion methods used to ensure calls are made as expected.
+        - Failed assertions raise an AssertionError
+
+```py
+from unittest.mock import Mock
+
+def greeter(name: str, display_callable: callable = print):
+    '''
+        Demo function to demo how to use a mock in place of another object.
+    '''
+    display_callable(f'Hello, {name}')
+
+# This will display Hello, World in the console because the built-in print
+# function is the default argument for the display_callable parameter.
+greeter(name='Iroshan')
+
+# Call again passing a mock as the display_callable.
+display=Mock()
+
+# This will not display in the console because the mock is called in
+# place of the print function.
+greeter(name='World', display_callable=display)
+
+# Mocks include different assertion methods used to determine if the
+# mock implementation is called as expected.
+
+# Verify that the mock implementation of print is called with the expected
+# argument value.
+display.assert_called_with('Hello, World')
+
+#################################
+print('No assertion errors')
+```
+
