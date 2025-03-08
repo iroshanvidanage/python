@@ -1366,3 +1366,10 @@ print('No assertion errors')
 - Assertion methods raise an `AssertionError` for False assertions.
 - Some common assertion methods in this [snippet](playground_mockcallable_assertions.py).
 
+
+### Inspecting Calls
+
+- Mock records all calls made along with arguments. Assertion methods can make claims about how calls are made. However, they're unable to provide detailed insights into calls.
+- Mocks include attributes used to access more detailed call information. The `unittest.mock` module includes a object named [`call`](https://docs.python.org/3/library/unittest.mock.html#unittest.mock.call) used as a means of creating calls for comparison against recorded calls. Providing call the same arguments provided to a mock call makes the two calls comparable.
+- [Playground_snippet](playground_mock_calls.py)
+
