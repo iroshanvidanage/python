@@ -1351,3 +1351,10 @@ display.assert_called_with('Hello, World')
 print('No assertion errors')
 ```
 
+
+### Callables
+
+- Mock objs are callable, allowing them to replace callable objs with a fake implementation.
+- They accept any number of arguments and can return a value when called.
+- Playground [snippet](playground_mock_callables.py).
+
