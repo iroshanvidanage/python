@@ -1395,3 +1395,11 @@ assert int(ImNumeric(100)) == 100
 - The `unittest.mock` module includes a mock called MagicMock which implements many commonly used magic methods.
 - Example [playground](playground_mock_magicmock.py) script.
 
+
+### Side Effects
+
+- Mocks return values directly by setting a mock's `return_value` attribute. Mock objs include another mechanism which allows for more complex call behaviors referred to as _side effects_.
+- Side effects are able to raise exceptions, return multiple values, and call callables.
+- They can be set when creating a mock using the `side_effect` keyword arg. And also be set after creation using the `side_effect` attribute.
+- [Playground_snippet](./playground_mock_sideeffects.py)
+
