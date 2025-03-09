@@ -1403,3 +1403,11 @@ assert int(ImNumeric(100)) == 100
 - They can be set when creating a mock using the `side_effect` keyword arg. And also be set after creation using the `side_effect` attribute.
 - [Playground_snippet](./playground_mock_sideeffects.py)
 
+
+### Attributes
+
+- Mock objects allow attributes to be set when created using keyword args. Attributes can also be set after an object is created.
+- Mocks create attributes dynamically when accessed if they don't already exist. Removed attributes are not dynamically re-created on subsequent attempts to access.
+- [Playground_snippet](./playground_mock_attributes.py)
+
+
