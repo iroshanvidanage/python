@@ -1373,3 +1373,23 @@ print('No assertion errors')
 - Mocks include attributes used to access more detailed call information. The `unittest.mock` module includes a object named [`call`](https://docs.python.org/3/library/unittest.mock.html#unittest.mock.call) used as a means of creating calls for comparison against recorded calls. Providing call the same arguments provided to a mock call makes the two calls comparable.
 - [Playground_snippet](playground_mock_calls.py)
 
+
+### MagicMock
+
+- Mock objs don't implement magic methods by default. Magic methods are special methods used to allow objs to leverage different language features.
+- Implementing the `__int__` magic method allows the obj to be converted to an int using the built-in `int` callable.
+
+```py
+class ImNumeric:
+    def __init__(self, number):
+        self.number = number
+    def __int__(self):
+        return self.number
+
+#
+#
+assert int(ImNumeric(100)) == 100
+
+```
+
+- The `unittest.mock` module includes a mock called MagicMock which implements many commonly used magic methods.
