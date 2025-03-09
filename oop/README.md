@@ -1393,3 +1393,5 @@ assert int(ImNumeric(100)) == 100
 ```
 
 - The `unittest.mock` module includes a mock called MagicMock which implements many commonly used magic methods.
+- Example [playground](playground_mock_magicmock.py) script.
+
