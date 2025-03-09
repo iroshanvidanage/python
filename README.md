@@ -12,11 +12,11 @@
 
 ### AccessWeb
 
-- 
+- A simple project created with the Py4e. [AccessWeb](./AccessWeb/)
 
 ### AlgorithmicToolbox
 
-- 
+- Snippets of Algorithms and testing. [AlgorithmicToolbox](./AlgorithmicToolbox/)
 
 ### Binaries
 
@@ -52,19 +52,19 @@
 
 ### QR
 
-- A basic QR code generator.
+- A basic QR code [generator](./QR/).
 
 ### URL_shortner
 
-- A basic url shortner script.
+- A basic url shortner [script](./URL_shortener/).
 
 ### YTDownloader
 
-- A classic youtube downloader.
+- A classic youtube [downloader](./YTDownloader/).
 
-### dunder_methods
+### py_snippets
 
-- Scripts written to test dunder methods.
+- Various test scripts and code [snippets](./py_snippets/).
 
 ### gitlab_proj
 
@@ -104,9 +104,8 @@
 
 - My first programming interview questions.
 
-
-
-#
+\
+&nbsp;
 
 ## Contact
 
