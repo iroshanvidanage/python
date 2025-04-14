@@ -1418,3 +1418,9 @@ assert int(ImNumeric(100)) == 100
 - The `unittest.mock` module includes mechanisms used to ensure mock objects adhere more closely to the objects being mocked.
 - [Playground_snippet](./playground_mock_auto_spec.py)
 
+
+### Using Mock Inside Test Cases
+
+- Mock objects commonly replace external resources and services. Imagine functionality is built around a callable that connects to a REST API, transforms the data, and returns the results to the caller.
+- The REST API shouldn't be required in order to test the surrounding functionality.
+- Following [code_snippet](./tests/test_mocks.py) demostrates using a mock to replace the `resource_finder` callable which simulates returning data from an external service.
