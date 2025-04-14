@@ -1411,3 +1411,8 @@ assert int(ImNumeric(100)) == 100
 - [Playground_snippet](./playground_mock_attributes.py)
 
 
+### Spec and Auto Spec
+
+- Mock objects create attributes and methods on-demand giving them the ability to replace other objects. Allowing for maximum flexibility, mocks don't enforce restrictions on allowed attributes or callable parameters.
+- These allowed differences can lead to tests which are tightly coupled to mock objects rather than the objects being mocked.
+- The `unittest.mock` module includes mechanisms used to ensure mock objects adhere more closely to the objects being mocked.
