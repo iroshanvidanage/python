@@ -1424,3 +1424,9 @@ assert int(ImNumeric(100)) == 100
 - Mock objects commonly replace external resources and services. Imagine functionality is built around a callable that connects to a REST API, transforms the data, and returns the results to the caller.
 - The REST API shouldn't be required in order to test the surrounding functionality.
 - Following [code_snippet](./tests/test_mocks.py) demostrates using a mock to replace the `resource_finder` callable which simulates returning data from an external service.
+
+
+### Patching
+
+- Code is commonly tightly coupled to external resources and services, making it more challenging to leverage mocks.
+- The below code block demonstrates a function calling the built-in print callable. testing this code poses a challenge because the greeter function depends on print which writes data to standard output by default.
