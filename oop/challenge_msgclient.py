@@ -39,8 +39,21 @@ import socket, threading, time
 from functools import wraps
 
 class MessageServer:
+    ''' A simple TCP server that stores and echoes messages.
+
+        >>> server = MessageServer()
+        >>> server.msgs = [b'hello', b'world']
+        >>> server.search(lambda m: b'o' in m)
+        [b'hello', b'world']
+    '''
 
     def __init__(self, host: str='127.0.0.1', port: int=5000) -> None:
+        ''' Initializes the server with a host and port.
+
+            >>> s = MessageServer('localhost', 1234)
+            >>> s.host, s.post
+            ('localhost', 1234)
+        '''
         self.host = host
         self.port = port
         self.msgs = []
@@ -48,6 +61,8 @@ class MessageServer:
     def serve(self) -> None:
         ''' A basic TCP/IP listener
             Listens on the supplied host/port for binary data.
+
+            This method runs indefinitely and is not tested here.
         '''
 
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -65,6 +80,9 @@ class MessageServer:
     def serve_forever(self, **kwargs) -> None:
         ''' Runs the message_server function in a background thread.
             Must be running before the client can be used.
+
+            >>> server = MessageServer()
+            >>> server.serve_forever()
         '''
         server = threading.Thread(target=self.serve, kwargs=kwargs, name='nerwork_server', daemon=True)
         server.start()
@@ -76,6 +94,11 @@ class MessageServer:
             
             Returns:
                 A list of messages that return True when passed to the callable.
+            
+            >>> server = MessageServer()
+            >>> server.msgs = [b'hello', b'hi']
+            >>> server.search(lambda m: b'o' in m)
+            [b'hello', b'hi']
         '''
         return [msg for msg in self.msgs if fn(msg)]
     
@@ -95,6 +118,13 @@ class MessageServer:
 def redact(function):
     ''' A decorator used to redact messages sent via the send_message method of the MessageClient.
         Messages are expected to be bytes objects. NOT str objects.
+
+        >>> @redact()
+        ... def echo(_, msg): return msg
+        >>> echo(None, b'TOP SECRET: aliens')
+        b'TOP SECRET: ******'
+        >>> echo(None, b'hello')
+        b'hello'
     '''
     @wraps(function)
     def wrapper(*args, **kwargs):
@@ -139,6 +169,12 @@ class MessageClient:
         b'TOP SECRET: **********************************
     '''
     def __init__(self, host: str='127.0.0.1', port: int=5000) -> None:
+        ''' Initializes the client with a host and port.
+
+            >>> c = MessageServer('localhost', 1234)
+            >>> c.host, c.post
+            ('localhost', 1234)
+        '''
         self.connection = None
         self.host = host
         self.port = port
