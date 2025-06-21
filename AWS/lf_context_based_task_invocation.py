@@ -52,6 +52,21 @@ def lambda_handler(event, context):
     """
     trigger_source = context.invoked_function_arn.split(':')[2]
 
+    # Check for SNS trigger
+    if "Records" in event and event["Records"][0].get("EventSource") == "aws:sns":
+        trigger_source = "sns"
+        message_details = json.loads(event["Records"][0]["Sns"]["Message"])
+    
+    # Check for EventBridge trigger
+    elif "source" in event and "detail-type" in event:
+        trigger_source = "event"
+    else:
+        logger.error(f"Unknown trigger source {event}")
+        return {
+            "statusCode": 400,
+            "body": "Unsupported trigger source"
+        }
+
     source = {
         "event": {
             "print": "Triggered by EventRule"
@@ -80,10 +95,10 @@ def lambda_handler(event, context):
 
     if trigger_source == "sns":
         logger.info(f"Task assignment triggered by SNS is executing for {','.join(event.keys())}")
-        assign_engineer(task_data=event)
+        assign_engineer(task_data=message_details)
         return
     
-    # If not triggered by the above should proceed with the regular operation
+    # If not triggered by the SNS should proceed with the regular operation
     tasks_in_queue = get_task_data()
     assign_engineer(task_data=tasks_in_queue)
     

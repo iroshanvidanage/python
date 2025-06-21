@@ -29,3 +29,31 @@
 }
 ```
 
+- The `event` object structure differes when triggered by different sources.
+
+- *SNS Triggered event*
+```json
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "Sns": {
+        "Message": "{\"Location\": \"SEA\", \"WeatherData\": {\"TemperaturesC\": {\"MinTempC\": -5.56, \"MaxTempC\": 25.56}, \"PressuresHPa\": {\"MinPresHPa\": 1015, \"MaxPresHPa\": 1027}}}"
+      }
+    }
+  ]
+}
+```
+
+- *EventBridge Triggered event*
+```json
+{
+  "version": "0",
+  "id": "event-id",
+  "source": "your.custom.source",
+  "detail-type": "Your Event Detail Type",
+  "detail": {
+    ...
+  }
+}
+```
