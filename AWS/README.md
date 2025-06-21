@@ -10,3 +10,22 @@
 
 - The `context object` can be used to differentiate the task invocation using the trigger data.
 - `invoked_function_arn` gives the ARN that's used to invoke the function.
+
+- Example lambda event
+
+```json
+{
+    "Location": "SEA",
+    "WeatherData": {
+        "TemperaturesC": {
+            "MinTempC": -5.56,
+            "MaxTempC": 25.56
+        },
+        "PressuresHPa": {
+            "MinPresHPa": 1015,
+            "MaxPresHPa": 1027
+        }
+    }
+}
+```
+
