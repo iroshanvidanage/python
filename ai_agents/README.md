@@ -1,1 +1,1 @@
-The project sample is from [here] (https://github.com/microsoft/semantic-kernel/tree/main/python/samples/getting_started)
+The project sample is from [here](https://github.com/microsoft/semantic-kernel/tree/main/python/samples/getting_started)
