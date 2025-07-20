@@ -13,3 +13,7 @@ venv
 
 # exclude lib cache
 */__pycache__
+
+# env files
+.env
+*/.env
