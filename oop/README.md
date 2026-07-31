@@ -1433,5 +1433,28 @@ assert int(ImNumeric(100)) == 100
 - The below code block demonstrates a function calling the built-in print callable. testing this code poses a challenge because the greeter function depends on print which writes data to standard output by default.
 
 
-## Tetsting, Debugging & Logging
+## Testing, Debugging & Logging
 
+### Caveman Debugging
+
+- Software bugs occur when a code defect results in unexpected behaviors such as errors or incorrect results. The process of locating a bug and correcting the defect is referred to as debugging.
+- Debugging is a core part of the development process.going from the initial proof-of-concept code to the final app is an iterative process. Code is run, observed and tested as it changes.
+- Software debugging scales in complexity based on the complexity of the system being debugged.
+- Caveman debugging in Python involves writing data to the standard output.
+- Observe the script [`debugging_caveman.py`](./debugging_caveman.py)
+
+
+### Logging
+
+- Leaving miscellaneous debugging related print statements in code is typically discouraged.
+- Logs are a more structured means of producing details related to an applications's events.
+- Python's standard library includes a logging module. The levels are ordered by severity (least to greatest). [DEBUG, INFO, WARNING, ERROR, CRITICAL]
+- The [`logging_web.py`](./logging_web.py) uses the logging module to log evens at different log levels.
+- Steps to test Application
+    - Request the index page. `curl "localhost:5000/"`
+    - Creating [per module loggers](https://docs.python.org/3/howto/logging.html#logging-advanced-tutorial)
+    - Observe logged error. `curl "localhost:5000/reverse-it?text=welcome"`
+    - Change the log levels from `INFO` to `DEBUG` and re run the last `curl` command.
+
+
+### 
