@@ -1,5 +1,6 @@
 # Python OOP
 
+[[_TOC_]]
 
 ## Create a virtual env
 
@@ -1430,3 +1431,7 @@ assert int(ImNumeric(100)) == 100
 
 - Code is commonly tightly coupled to external resources and services, making it more challenging to leverage mocks.
 - The below code block demonstrates a function calling the built-in print callable. testing this code poses a challenge because the greeter function depends on print which writes data to standard output by default.
+
+
+## Tetsting, Debugging & Logging
+

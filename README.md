@@ -54,6 +54,10 @@
 
 - A basic QR code [generator](./QR/).
 
+### RAG ChatBot
+
+- A [Chatbot](./rag_chatbot/README.md) using OpenAI GPT LLM, Langchain, Streamlit.
+
 ### URL_shortner
 
 - A basic url shortner [script](./URL_shortener/).
