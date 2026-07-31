@@ -1457,4 +1457,26 @@ assert int(ImNumeric(100)) == 100
     - Change the log levels from `INFO` to `DEBUG` and re run the last `curl` command.
 
 
-### 
+### Python Debugger - PDB
+
+- The Python Debugger is a source code debugging module in the standard library called `pdb`. The pdb module provides a console which serves as a gateway between source code and the interpreter.
+- PDB allows developers to set specific line numbers at which to pause. these are known as `breakpoints`. Setting breakpoints allows code to flow normally and pause when the interpreter encounters a breakpoint.
+- Being able to inspect the state of an application provides better insights into what's happening inside the python `runtime`.
+- [`debugging_guess.py`](./debugging_guess.py)
+- Steps to test Application
+    - `python3 -m pdb debugging_guess.py`
+    - Use the [debugger commands](https://docs.python.org/3/library/pdb.html#debugger-commands) to navigate through the source code.
+
+
+### Development Workflow
+
+- In certain cases the Python debugger can help to more quickly iterate on code.
+- Can use the pdb module and call the `set_trace` callable to set breakpoints.
+
+```py
+import pdb; pdb.set_trace()
+```
+
+- [development_workflow_tasks.py](./development_workflow_tasks.py)
+- Use [`sorted`](https://docs.python.org/3/library/functions.html#sorted) return the task list.
+
