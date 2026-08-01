@@ -1480,3 +1480,7 @@ import pdb; pdb.set_trace()
 - [development_workflow_tasks.py](./development_workflow_tasks.py)
 - Use [`sorted`](https://docs.python.org/3/library/functions.html#sorted) return the task list.
 
+- [debugging_blackjack.py](./debugging_blackjack.py) is an example to test the debugging experience.
+- Remove the `return` keyword from the line 21 and try to get the keyvalue exception. Put a non-numeric value and try.
+
+
